@@ -1,31 +1,35 @@
-//TestService.java
-package test.common;
+package Network;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 
+import Utility.MyUtilities;
 import net.sf.lipermi.exception.LipeRMIException;
 import net.sf.lipermi.handler.CallHandler;
 import net.sf.lipermi.net.IServerListener;
 import net.sf.lipermi.net.Server;
 
-//TestServer.java
-
-public class TestServer implements TestService {
-    public TestServer() {
+public class RmiServer implements RmiInterface {
+	
+	private ArrayList<Socket> clientsList = new ArrayList<Socket>();
+	
+    public RmiServer() {
         try {
             CallHandler callHandler = new CallHandler();
-            callHandler.registerGlobal(TestService.class, this);
+            callHandler.registerGlobal(RmiInterface.class, this);
             Server server = new Server();
             server.bind(7777, callHandler);
             server.addServerListener(new IServerListener() {
                 @Override
                 public void clientDisconnected(Socket socket) {
-                    System.out.println("Client Disconnected: " + socket.getInetAddress());
+                	clientsList.add(socket);
+                	MyUtilities.printLog("Client Disconnected: " + socket.getInetAddress());
                 }
                 @Override
                 public void clientConnected(Socket socket) {
-                    System.out.println("Client Connected: " + socket.getInetAddress());
+                	clientsList.remove(socket);
+                    MyUtilities.printLog("Client Connected: " + socket.getInetAddress());
                 }
             });
             System.out.println("Server Listening");
@@ -33,9 +37,16 @@ public class TestServer implements TestService {
             e.printStackTrace();
         }
     }
+    
+    
     @Override
     public String getResponse(String data) {
-        System.out.println("getResponse called");
+        MyUtilities.printLog("getResponse called");
         return "Your data: " + data;
     }
+	@Override
+	public boolean checkConnection() {
+		MyUtilities.printLog("");
+		return true;
+	}
 }
