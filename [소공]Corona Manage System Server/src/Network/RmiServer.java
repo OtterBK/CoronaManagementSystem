@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import Utility.MyUtilities;
+import Addon.MyUtility;
 import net.sf.lipermi.exception.LipeRMIException;
 import net.sf.lipermi.handler.CallHandler;
 import net.sf.lipermi.net.IServerListener;
@@ -24,15 +24,15 @@ public class RmiServer implements RmiInterface {
                 @Override
                 public void clientDisconnected(Socket socket) {
                 	clientsList.add(socket);
-                	MyUtilities.printLog("Client Disconnected: " + socket.getInetAddress());
+                	MyUtility.printLog("Client Disconnected: " + socket.getInetAddress());
                 }
                 @Override
                 public void clientConnected(Socket socket) {
                 	clientsList.remove(socket);
-                    MyUtilities.printLog("Client Connected: " + socket.getInetAddress());
+                    MyUtility.printLog("Client Connected: " + socket.getInetAddress());
                 }
             });
-            System.out.println("Server Listening");
+            MyUtility.printLog("Server Listening");
         } catch (LipeRMIException | IOException e) {
             e.printStackTrace();
         }
@@ -41,12 +41,12 @@ public class RmiServer implements RmiInterface {
     
     @Override
     public String getResponse(String data) {
-        MyUtilities.printLog("getResponse called");
+        MyUtility.printLog("getResponse called");
         return "Your data: " + data;
     }
 	@Override
 	public boolean checkConnection() {
-		MyUtilities.printLog("");
+		MyUtility.printLog("");
 		return true;
 	}
 }
