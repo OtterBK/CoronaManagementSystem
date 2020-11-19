@@ -22,11 +22,11 @@ import javax.swing.JButton;
 
 public class HomeGUI extends JFrame{
 
-	private int frameWidth = 400;
+	private int frameWidth = 500;
 	private int frameHeight = 600;
 	
 	public HomeGUI() {
-		setResizable(false);
+		setResizable(true);
 		Toolkit tk = Toolkit.getDefaultToolkit(); //»ç¿ëÀÚÀÇ È­¸é Å©±â°ªÀ» ¾ò±âÀ§ÇÑ ÅøÅ¶ Å¬·¡½º
 		
 		setSize(frameWidth,frameHeight);
@@ -50,16 +50,16 @@ public class HomeGUI extends JFrame{
 		ImageIcon homeIcon = MyUtility.resizeImage(new ImageIcon(homeSrc), 50, 50);
 
 		URL settingSrc = LoginGUI.class.getResource("/resources/settingIcon.png");
-		ImageIcon settingIcon = MyUtility.resizeImage(new ImageIcon(settingSrc), 40, 40);
+		ImageIcon settingIcon = MyUtility.resizeImage(new ImageIcon(settingSrc), 30, 30);
 		
 		URL src = LoginGUI.class.getResource("/resources/check.png");
-		ImageIcon checkIcon = MyUtility.resizeImage(new ImageIcon(src), 40, 40);
+		ImageIcon checkIcon = MyUtility.resizeImage(new ImageIcon(src), 20, 20);
 		
 		src = LoginGUI.class.getResource("/resources/delete.png");
-		ImageIcon deleteIcon = MyUtility.resizeImage(new ImageIcon(src), 40, 40);
+		ImageIcon deleteIcon = MyUtility.resizeImage(new ImageIcon(src), 20, 20);
 		
 		JPanel topPanel = new JPanel();
-		topPanel.setBounds(50, 30, 300, 70);
+		topPanel.setBounds(100, 30, 300, 70);
 		getContentPane().add(topPanel);
 		topPanel.setLayout(null);
 		topPanel.setBackground(MyColor.LIGHTSKY);
@@ -77,53 +77,58 @@ public class HomeGUI extends JFrame{
 		topPanel.add(lb_homeIcon);
 		
 		JPanel adminInfoPanel = new JPanel();
-		adminInfoPanel.setBounds(25, 150, 345, 100);
+		adminInfoPanel.setBounds(50, 150, 400, 100);
 		getContentPane().add(adminInfoPanel);
 		adminInfoPanel.setLayout(null);
-		
-		JLabel lb_icon_adminInfo = new JLabel("");
-		lb_icon_adminInfo.setBounds(10, 5, 40, 40);
-		adminInfoPanel.add(lb_icon_adminInfo);
+		adminInfoPanel.setBorder(brdr);
 		adminInfoPanel.setBackground(MyColor.STEELBLUE);
 		
+//		JLabel lb_icon_adminInfo = new JLabel(settingIcon);
+//		lb_icon_adminInfo.setBounds(10, 7, 40, 40);
+//		adminInfoPanel.add(lb_icon_adminInfo);
+//		
+		
 		JLabel lb_adminInfoTitle = new JLabel("°ü¸®ÀÚ Á¤º¸");
-		lb_adminInfoTitle.setForeground(MyColor.PLUSIANBLUE);
-		lb_adminInfoTitle.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 16));
+		lb_adminInfoTitle.setIcon(settingIcon);
+		lb_adminInfoTitle.setForeground(MyColor.LIGHTYELLOW);
+		lb_adminInfoTitle.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 18));
 		lb_adminInfoTitle.setHorizontalAlignment(SwingConstants.LEFT);
-		lb_adminInfoTitle.setBounds(65, 12, 100, 25);
+		lb_adminInfoTitle.setBounds(22, 10, 150, 40);
 		adminInfoPanel.add(lb_adminInfoTitle);
 		
-		JLabel btn_adminInfoAdd1 = new JLabel(checkIcon);
-		btn_adminInfoAdd1.setHorizontalAlignment(SwingConstants.LEFT);
-		btn_adminInfoAdd1.setBounds(10, 55, 40, 40);
-		btn_adminInfoAdd1.setOpaque(false);
-		adminInfoPanel.add(btn_adminInfoAdd1);
+//		JLabel btn_adminInfoAdd1 = new JLabel(checkIcon);
+//		btn_adminInfoAdd1.setHorizontalAlignment(SwingConstants.LEFT);
+//		btn_adminInfoAdd1.setBounds(70, 65, 20, 20);
+//		btn_adminInfoAdd1.setOpaque(false);
+//		adminInfoPanel.add(btn_adminInfoAdd1);
 		
 		
 		JLabel btn_adminInfoAdd2 = new JLabel("°èÁ¤ Ãß°¡");
-		btn_adminInfoAdd2.setForeground(MyColor.SMOOTHBLACK);
-		btn_adminInfoAdd2.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 13));
+		btn_adminInfoAdd2.setIcon(checkIcon);
+		btn_adminInfoAdd2.setForeground(MyColor.WHITE);
+		btn_adminInfoAdd2.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 15));
 		btn_adminInfoAdd2.setHorizontalAlignment(SwingConstants.LEFT);
-		btn_adminInfoAdd2.setBounds(65, 62, 100, 25);
-		btn_adminInfoAdd2.setOpaque(false);
-		btn_adminInfoAdd2.setBorder(new LineBorder(MyColor.STEELBLUE, 2));
+		btn_adminInfoAdd2.setBounds(75, 62, 100, 25);
+		//btn_adminInfoAdd2.setOpaque(false);
+		//btn_adminInfoAdd2.setBorder(new LineBorder(MyColor.SMOOTHBLACK, 2));
 		adminInfoPanel.add(btn_adminInfoAdd2);
 		
-		JLabel btn_adminInfoDel1 = new JLabel(deleteIcon);
-		btn_adminInfoDel1.setHorizontalAlignment(SwingConstants.LEFT);
-		btn_adminInfoDel1.setBounds(182, 54, 40, 40);
-		btn_adminInfoDel1.setOpaque(false);
-
-		adminInfoPanel.add(btn_adminInfoDel1);
+//		JLabel btn_adminInfoDel1 = new JLabel(deleteIcon);
+//		btn_adminInfoDel1.setHorizontalAlignment(SwingConstants.LEFT);
+//		btn_adminInfoDel1.setBounds(240, 65, 20, 20);
+//		btn_adminInfoDel1.setOpaque(false);
+//
+//		adminInfoPanel.add(btn_adminInfoDel1);
 		
 		
 		JLabel btn_adminInfoDel2 = new JLabel("°èÁ¤ »èÁ¦");
-		btn_adminInfoDel2.setForeground(MyColor.SMOOTHBLACK);
-		btn_adminInfoDel2.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 13));
+		btn_adminInfoDel2.setForeground(MyColor.WHITE);
+		btn_adminInfoDel2.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 15));
+		btn_adminInfoDel2.setIcon(deleteIcon);
 		btn_adminInfoDel2.setHorizontalAlignment(SwingConstants.LEFT);
-		btn_adminInfoDel2.setBounds(235, 62, 100, 25);
-		btn_adminInfoDel2.setOpaque(false);
-		btn_adminInfoDel2.setBorder(new LineBorder(MyColor.STEELBLUE, 2));
+		btn_adminInfoDel2.setBounds(245, 62, 100, 25);
+		//btn_adminInfoDel2.setOpaque(false);
+		//btn_adminInfoDel2.setBorder(new LineBorder(MyColor.SMOOTHBLACK, 2));
 		adminInfoPanel.add(btn_adminInfoDel2);
 	
 		this.setVisible(true);

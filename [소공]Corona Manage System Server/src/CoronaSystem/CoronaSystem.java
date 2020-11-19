@@ -7,7 +7,7 @@ import Network.RmiServer;
 public class CoronaSystem {
 
 	public static void main(String[] args) {
-		//LoginGUI home = new LoginGUI();
+		LoginGUI home = new LoginGUI();
 		
 		new HomeGUI();
 		

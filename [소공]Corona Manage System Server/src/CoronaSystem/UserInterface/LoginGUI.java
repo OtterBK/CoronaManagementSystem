@@ -154,11 +154,12 @@ public class LoginGUI extends JFrame{
 		btn_findPassword.setBorder(null);
 		btn_findPassword.setContentAreaFilled(false);
 		btn_findPassword.setFocusable(false);
+		btn_findPassword.setIcon(finderIcon);
 		getContentPane().add(btn_findPassword);
 		
-		JLabel lb_icon_finder = new JLabel(finderIcon);
-		lb_icon_finder.setBounds(358, 339, 20, 25);
-		getContentPane().add(lb_icon_finder);
+		//JLabel lb_icon_finder = new JLabel(finderIcon);
+		//lb_icon_finder.setBounds(358, 339, 20, 25);
+		//getContentPane().add(lb_icon_finder);
 		
 		setVisible(true);	
 	}
