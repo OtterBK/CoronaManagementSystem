@@ -17,5 +17,6 @@ public class MyColor {
 	public static Color SLATEGRAY = new Color(112, 128, 144);
 	public static Color PLUSIANBLUE = new Color(00, 52, 88);
 	public static Color STEELBLUE = new Color(70, 130, 180);
+	public static Color SMOOTHBLACK = new Color(33, 33, 26);
 	
 }
