@@ -20,7 +20,7 @@ import Addon.MyColor;
 import Addon.MyUtility;
 import javax.swing.JButton;
 
-public class AdminInfoAddGUI extends JFrame{
+public class AdminInfoDeleteGUI extends JFrame{
 
 	private int frameWidth = 400;
 	private int frameHeight = 400;
@@ -29,7 +29,7 @@ public class AdminInfoAddGUI extends JFrame{
 	private JPasswordField tf_password;
 	private JPasswordField tf_confirmPassword;
 	
-	public AdminInfoAddGUI() {
+	public AdminInfoDeleteGUI() {
 		setResizable(false);
 		Toolkit tk = Toolkit.getDefaultToolkit(); //사용자의 화면 크기값을 얻기위한 툴킷 클래스
 		
@@ -58,7 +58,7 @@ public class AdminInfoAddGUI extends JFrame{
 		topPanel.setBackground(MyColor.LIGHTSKY);
 		topPanel.setBorder(brdr);
 		
-		JLabel lb_title = new JLabel("계정 추가");
+		JLabel lb_title = new JLabel("계정 삭제");
 		lb_title.setFont(new Font("맑은 고딕", Font.BOLD, 22));
 		lb_title.setHorizontalAlignment(SwingConstants.LEFT);
 		lb_title.setBounds(12, 10, 170, 50);
@@ -133,7 +133,7 @@ public class AdminInfoAddGUI extends JFrame{
 		lbl_tempMessage.setBounds(50, 300, 285, 30);
 		getContentPane().add(lbl_tempMessage);
 		
-		JButton btn_add = new JButton("추가");
+		JButton btn_add = new JButton("삭제");
 		btn_add.setFont(new Font("맑은 고딕", Font.BOLD, 14));
 		btn_add.setForeground(MyColor.WHITE);
 		btn_add.setFocusPainted(false);
