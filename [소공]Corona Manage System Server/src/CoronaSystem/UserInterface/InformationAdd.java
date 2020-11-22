@@ -10,7 +10,6 @@ import java.awt.event.WindowEvent;
 import java.net.URL;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -23,8 +22,9 @@ import javax.swing.border.LineBorder;
 import Addon.BubbleBorder;
 import Addon.MyColor;
 import Addon.MyUtility;
+import javax.swing.JButton;
 
-public class LoginGUI extends JFrame{
+public class InformationAdd extends JFrame{
 
 	private int frameWidth = 500;
 	private int frameHeight = 400;
@@ -32,7 +32,7 @@ public class LoginGUI extends JFrame{
 	private JPasswordField tf_pw;
 	private JButton btn_findPassword;
 	
-	public LoginGUI() {
+	public InformationAdd() {
 		setResizable(false);
 		Toolkit tk = Toolkit.getDefaultToolkit(); //사용자의 화면 크기값을 얻기위한 툴킷 클래스
 		
@@ -50,14 +50,14 @@ public class LoginGUI extends JFrame{
 		AbstractBorder brdr = new BubbleBorder(Color.BLACK,2,16,0);
 		
 		//리소스 미리 불러오기
-		URL titleIconSrc = LoginGUI.class.getResource("/resources/titleIcon.png");
+		URL titleIconSrc = InformationAdd.class.getResource("/resources/titleIcon.png");
 		ImageIcon titleIcon = MyUtility.resizeImage(new ImageIcon(titleIconSrc), 70, 70);
 		setIconImage(titleIcon.getImage());
 		
-		URL logoSrc = LoginGUI.class.getResource("/resources/logo.png");
+		URL logoSrc = InformationAdd.class.getResource("/resources/logo.png");
 		ImageIcon logoIcon = MyUtility.resizeImage(new ImageIcon(logoSrc), 70, 70);
 		
-		URL finderSrc = LoginGUI.class.getResource("/resources/finder.png");
+		URL finderSrc = InformationAdd.class.getResource("/resources/finder.png");
 		ImageIcon finderIcon = MyUtility.resizeImage(new ImageIcon(finderSrc), 20, 20);
 		
 		JPanel centerPanel = new JPanel();
@@ -164,26 +164,12 @@ public class LoginGUI extends JFrame{
 		setVisible(true);	
 	}
 	
-	private void tryLogin() { //로그인 시도
-		if (tf_id.getText().equals("")) { //ID입력 확인
-			CheckGUI cf = new CheckGUI(this, "ID를 입력해주세요.", false, false);
-		} else if (tf_pw.getText().equals("")) { //pW입려 확인
-			CheckGUI cf = new CheckGUI(this, "PW를 입력해주세요.", false, false);
-		} else {
-			String id = tf_id.getText();
-			String pw = ""; // 입력한 pw 저장할 곳
-			char[] tmpPw = tf_pw.getPassword(); // 반환값이 char[] 이기 때문에 string 으로 바꾸기 위한 작업 필요
-			for (char tmpCh : tmpPw) {
-				Character.toString(tmpCh); // 한글자씩 가져와서 string으로 합침
-				pw += tmpCh;
-			}		
-		}
-	}
+	
 	
 	
 	private class JFrameWindowClosingEventHandler extends WindowAdapter { //창 닫기시
 		public void windowClosing(WindowEvent e) {
-			if(e.getWindow() instanceof LoginGUI) { //홈 화면 닫으면
+			if(e.getWindow() instanceof InformationAdd) { //홈 화면 닫으면
 				System.exit(0); //프로그램 종료
 			}	
 		}
