@@ -45,11 +45,11 @@ public class AdminInfoDeleteGUI extends JFrame{
 		AbstractBorder brdr = new BubbleBorder(Color.BLACK, 2, 16, 0);
 
 		// 리소스 미리 불러오기
-		URL src = LoginGUI.class.getResource("/resources/check.png");
+		URL src = AdminInfoDeleteGUI.class.getResource("/resources/check.png");
 		ImageIcon checkIcon = MyUtility.resizeImage(new ImageIcon(src), 70, 70);
 		
-		src = LoginGUI.class.getResource("/resources/home.png");
-		ImageIcon homeIcon = MyUtility.resizeImage(new ImageIcon(src), 50, 50);
+		src = AdminInfoDeleteGUI.class.getResource("/resources/delete.png");
+		ImageIcon deleteIcon = MyUtility.resizeImage(new ImageIcon(src), 50, 50);
 		
 		JPanel topPanel = new JPanel();
 		topPanel.setBounds(50, 10, 300, 70);
@@ -65,7 +65,7 @@ public class AdminInfoDeleteGUI extends JFrame{
 		lb_title.setForeground(MyColor.PLUSIANBLUE);
 		topPanel.add(lb_title);
 		
-		JLabel lb_homeIcon = new JLabel(homeIcon);
+		JLabel lb_homeIcon = new JLabel(deleteIcon);
 		lb_homeIcon.setBounds(235, 12, 50, 50);
 		topPanel.add(lb_homeIcon);
 		

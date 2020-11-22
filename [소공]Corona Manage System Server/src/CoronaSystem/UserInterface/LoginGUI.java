@@ -22,6 +22,10 @@ import javax.swing.border.LineBorder;
 import Addon.BubbleBorder;
 import Addon.MyColor;
 import Addon.MyUtility;
+import Client.CheckGUI;
+import Client.Client;
+import Client.MainMenuGUI;
+
 import javax.swing.JButton;
 
 public class LoginGUI extends JFrame{
@@ -164,7 +168,30 @@ public class LoginGUI extends JFrame{
 		setVisible(true);	
 	}
 	
-	
+	private void tryLogin() { //로그인 시도
+		if (tf_id.getText().equals("")) { //ID입력 확인
+			CheckGUI cf = new CheckGUI(this, "ID를 입력해주세요.", false, false);
+		} else if (tf_pw.getText().equals("")) { //pW입려 확인
+			CheckGUI cf = new CheckGUI(this, "PW를 입력해주세요.", false, false);
+		} else {
+			String id = tf_id.getText();
+			String pw = ""; // 입력한 pw 저장할 곳
+			char[] tmpPw = tf_pw.getPassword(); // 반환값이 char[] 이기 때문에 string 으로 바꾸기 위한 작업 필요
+			for (char tmpCh : tmpPw) {
+				Character.toString(tmpCh); // 한글자씩 가져와서 string으로 합침
+				pw += tmpCh;
+			}
+
+					
+					this.dispose(); //로그인 프레임 닫기
+					try { //혹시 몰라서 try
+						MainMenuGUI mainMenu = new MainMenuGUI(); //메인메뉴 프레임 띄우기
+					} catch (Exception e1) {
+						System.exit(0);
+					}
+			}			
+		}
+	}
 	
 	
 	private class JFrameWindowClosingEventHandler extends WindowAdapter { //창 닫기시

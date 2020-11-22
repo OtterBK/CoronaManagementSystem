@@ -45,10 +45,10 @@ public class AdminInfoAddGUI extends JFrame{
 		AbstractBorder brdr = new BubbleBorder(Color.BLACK, 2, 16, 0);
 
 		// 리소스 미리 불러오기
-		URL src = LoginGUI.class.getResource("/resources/check.png");
+		URL src = AdminInfoAddGUI.class.getResource("/resources/check.png");
 		ImageIcon checkIcon = MyUtility.resizeImage(new ImageIcon(src), 70, 70);
 		
-		src = LoginGUI.class.getResource("/resources/home.png");
+		src = AdminInfoAddGUI.class.getResource("/resources/check.png");
 		ImageIcon homeIcon = MyUtility.resizeImage(new ImageIcon(src), 50, 50);
 		
 		JPanel topPanel = new JPanel();
