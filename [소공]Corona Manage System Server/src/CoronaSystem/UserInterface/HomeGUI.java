@@ -121,6 +121,7 @@ public class HomeGUI extends JFrame{
 		//btn_adminInfoAdd2.setOpaque(false);
 		//btn_adminInfoAdd2.setBorder(new LineBorder(MyColor.SMOOTHBLACK, 2));
 		adminInfoPanel.add(btn_adminInfoAdd2);
+		//클릭하면 계정 추가 프레임 열리게
 		
 //		JLabel btn_adminInfoDel1 = new JLabel(deleteIcon);
 //		btn_adminInfoDel1.setHorizontalAlignment(SwingConstants.LEFT);
@@ -139,6 +140,7 @@ public class HomeGUI extends JFrame{
 		//btn_adminInfoDel2.setOpaque(false);
 		//btn_adminInfoDel2.setBorder(new LineBorder(MyColor.SMOOTHBLACK, 2));
 		adminInfoPanel.add(btn_adminInfoDel2);
+		//클릭하면 계정 삭제 프레임 열리게
 		
 		JPanel coronicInfoPanel = new JPanel();
 		coronicInfoPanel.setLayout(null);
@@ -162,6 +164,7 @@ public class HomeGUI extends JFrame{
 		lbl_coronicInfo_add.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		lbl_coronicInfo_add.setBounds(75, 62, 100, 25);
 		coronicInfoPanel.add(lbl_coronicInfo_add);
+		//클릭하면 정보 추가 프레임 열리게
 		
 		JLabel lbl_coronicInfo_edit = new JLabel("정보 수정");
 		lbl_coronicInfo_edit.setIcon(editIcon);
@@ -170,6 +173,7 @@ public class HomeGUI extends JFrame{
 		lbl_coronicInfo_edit.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		lbl_coronicInfo_edit.setBounds(245, 62, 100, 25);
 		coronicInfoPanel.add(lbl_coronicInfo_edit);
+		//클릭하면 정보 수정 프레임 열리게
 		
 		JPanel coronaMapPanel = new JPanel();
 		coronaMapPanel.setLayout(null);
@@ -185,6 +189,7 @@ public class HomeGUI extends JFrame{
 		lbl_coronaMapTitle.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		lbl_coronaMapTitle.setBounds(22, 10, 200, 40);
 		coronaMapPanel.add(lbl_coronaMapTitle);
+
 		
 		JLabel lbl_coronaMap_add = new JLabel("정보 추가");
 		lbl_coronaMap_add.setIcon(checkIcon);
@@ -193,6 +198,7 @@ public class HomeGUI extends JFrame{
 		lbl_coronaMap_add.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		lbl_coronaMap_add.setBounds(75, 62, 100, 25);
 		coronaMapPanel.add(lbl_coronaMap_add);
+		//클릭하면 동선 정보 추가 프레임 열리게
 		
 		JLabel lbl_coronaMap_del = new JLabel("정보 삭제");
 		lbl_coronaMap_del.setIcon(deleteIcon);
@@ -201,6 +207,7 @@ public class HomeGUI extends JFrame{
 		lbl_coronaMap_del.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		lbl_coronaMap_del.setBounds(245, 62, 100, 25);
 		coronaMapPanel.add(lbl_coronaMap_del);
+		// 클릭하면 동선 정보 삭제 프레임 열리게
 	
 		this.setVisible(true);
 		
