@@ -24,7 +24,7 @@ import Addon.MyColor;
 import Addon.MyUtility;
 import javax.swing.JButton;
 
-public class informationAdd extends JFrame{
+public class InformationAdd extends JFrame{
 
 	private int frameWidth = 500;
 	private int frameHeight = 400;
@@ -38,7 +38,7 @@ public class informationAdd extends JFrame{
 	private JTextField textField_6;
 	private JTextField textField_7;
 	
-	public informationAdd() {
+	public InformationAdd() {
 		setResizable(false);
 		Toolkit tk = Toolkit.getDefaultToolkit(); //사용자의 화면 크기값을 얻기위한 툴킷 클래스
 		
@@ -56,14 +56,14 @@ public class informationAdd extends JFrame{
 		AbstractBorder brdr = new BubbleBorder(Color.BLACK,2,16,0);
 		
 		//리소스 미리 불러오기
-		URL titleIconSrc = informationAdd.class.getResource("/resources/titleIcon.png");
+		URL titleIconSrc = InformationAdd.class.getResource("/resources/titleIcon.png");
 		ImageIcon titleIcon = MyUtility.resizeImage(new ImageIcon(titleIconSrc), 70, 70);
 		setIconImage(titleIcon.getImage());
 		
-		URL logoSrc = informationAdd.class.getResource("/resources/logo.png");
+		URL logoSrc = InformationAdd.class.getResource("/resources/logo.png");
 		ImageIcon logoIcon = MyUtility.resizeImage(new ImageIcon(logoSrc), 70, 70);
 		
-		URL finderSrc = informationAdd.class.getResource("/resources/finder.png");
+		URL finderSrc = InformationAdd.class.getResource("/resources/finder.png");
 		ImageIcon finderIcon = MyUtility.resizeImage(new ImageIcon(finderSrc), 20, 20);
 		
 		URL homeSrc = LoginGUI.class.getResource("/resources/home.png");
@@ -179,7 +179,7 @@ public class informationAdd extends JFrame{
 	
 	private class JFrameWindowClosingEventHandler extends WindowAdapter { //창 닫기시
 		public void windowClosing(WindowEvent e) {
-			if(e.getWindow() instanceof informationAdd) { //홈 화면 닫으면
+			if(e.getWindow() instanceof InformationAdd) { //홈 화면 닫으면
 				System.exit(0); //프로그램 종료
 			}	
 		}
