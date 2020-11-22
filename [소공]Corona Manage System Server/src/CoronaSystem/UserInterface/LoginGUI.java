@@ -1,8 +1,15 @@
+//Front: 전재욱
+//Back: 전재욱
+//Last Update : 20.11.22
+//Des: 로그인 프레임 및 디자인
+
 package CoronaSystem.UserInterface;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
@@ -11,6 +18,7 @@ import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -29,7 +37,7 @@ public class LoginGUI extends JFrame{
 
 	private int frameWidth = 500;
 	private int frameHeight = 400;
-	private JTextField tf_id;
+	private JFormattedTextField tf_id;
 	private JPasswordField tf_pw;
 	private JButton btn_findPassword;
 	
@@ -81,20 +89,34 @@ public class LoginGUI extends JFrame{
 		lb_id.setBounds(35, 65, 25, 20);
 		centerPanel.add(lb_id);
 		
-		tf_id = new JTextField();
+		tf_id = new JFormattedTextField();
 		tf_id.setHorizontalAlignment(SwingConstants.RIGHT);
 		tf_id.setBounds(90, 65, 220, 25);
+		tf_id.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		centerPanel.add(tf_id);
 		tf_id.setColumns(10);
 		tf_id.setBackground(MyColor.LIGHTGRAY);
 		tf_id.setForeground(Color.black);
-		tf_id.setBorder(new LineBorder(MyColor.WHITE, 2));	
+		tf_id.setBorder(new LineBorder(MyColor.WHITE, 2));
 		tf_id.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent event) {
                 if(event.getKeyCode() == 10) { // 엔터키 키를 눌렀으면
                 	tryLogin();
-                }
+                } 
+            }
+            
+            @Override
+            public void keyTyped(KeyEvent e) {
+//            	char c = e.getKeyChar(); 숫자만
+//            	if(!Character.isDigit(c)) {
+//            		e.consume();
+//            	}
+            	
+            	JTextField tf = (JTextField) e.getSource();
+            	if(tf.getText().length() >= 12) {
+            		e.consume();
+            	}
             }
         });
 		
@@ -104,6 +126,7 @@ public class LoginGUI extends JFrame{
 		tf_pw.setEchoChar('*'); //해당 칸에는 입력시 * 로 표시함
 		tf_pw.setColumns(10);
 		tf_pw.setBackground(MyColor.LIGHTGRAY);
+		tf_pw.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		tf_pw.setForeground(Color.black);
 		tf_pw.setBorder(new LineBorder(MyColor.WHITE, 2));	
 		tf_pw.addKeyListener(new KeyAdapter() {
@@ -112,6 +135,14 @@ public class LoginGUI extends JFrame{
                 if(event.getKeyCode() == 10) { // 엔터키 키를 눌렀으면
                 	tryLogin();
                 }
+            }
+            
+            @Override
+            public void keyTyped(KeyEvent e) {
+            	JPasswordField tf = (JPasswordField) e.getSource();
+            	if(tf.getText().length() >= 14) {
+            		e.consume();
+            	}
             }
         });
 		centerPanel.add(tf_pw);
@@ -156,6 +187,13 @@ public class LoginGUI extends JFrame{
 		btn_findPassword.setContentAreaFilled(false);
 		btn_findPassword.setFocusable(false);
 		btn_findPassword.setIcon(finderIcon);
+		btn_findPassword.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JFrame findPasswordGUI = new FindPasswordGUI();
+			}
+		});
 		getContentPane().add(btn_findPassword);
 		
 		//JLabel lb_icon_finder = new JLabel(finderIcon);
@@ -197,7 +235,7 @@ public class LoginGUI extends JFrame{
 	
 	private class JFrameWindowClosingEventHandler extends WindowAdapter { //창 닫기시
 		public void windowClosing(WindowEvent e) {
-			if(e.getWindow() instanceof LoginGUI) { //홈 화면 닫으면
+			if(e.getWindow() instanceof LoginGUI) { //로그인 화면 닫으면
 				System.exit(0); //프로그램 종료
 			}	
 		}

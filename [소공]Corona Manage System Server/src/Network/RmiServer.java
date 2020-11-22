@@ -1,3 +1,8 @@
+//Front: 전재욱
+//Back: 전재욱
+//Last Update : 20.11.20
+//Des: 네트워크 통신 메서드
+
 package Network;
 
 import java.io.IOException;

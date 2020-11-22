@@ -1,3 +1,8 @@
+//Front: 전재욱
+//Back: 
+//Last Update : 20.11.23
+//Des : 데이터베이스에서 관리자 정보 삭제할 수 있는 프레임 및 기능
+
 package CoronaSystem.UserInterface;
 
 import java.awt.Color;
@@ -22,23 +27,23 @@ import javax.swing.JButton;
 
 public class AdminInfoDeleteGUI extends JFrame{
 
-	private int frameWidth = 400;
-	private int frameHeight = 400;
-	private JTextField tf_adminName;
-	private JTextField tf_id;
-	private JPasswordField tf_password;
-	private JPasswordField tf_confirmPassword;
+	private int frameWidth = 400; //가로
+	private int frameHeight = 450; //세로
+	private JTextField tf_adminName; //어드민명 입력 필드
+	private JTextField tf_id; //id 입력 필드
+	private JPasswordField tf_password; //pw 입력 필드
+	private JPasswordField tf_confirmPassword; //pw 확인 입력 필드
 	
 	public AdminInfoDeleteGUI() {
-		setResizable(false);
+		setResizable(false); //창 사이즈 조절 불가능
 		Toolkit tk = Toolkit.getDefaultToolkit(); //사용자의 화면 크기값을 얻기위한 툴킷 클래스
-		
-		setSize(frameWidth,frameHeight);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		 
+		setSize(frameWidth,frameHeight); //프레임 사이즈 설정
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE); //창 닫으면 닫힘
 		setBounds((int) tk.getScreenSize().getWidth() / 2 - frameWidth /2, (int) tk.getScreenSize().getHeight() / 2 - frameHeight/2, frameWidth, frameHeight);
 		
-		setTitle("관리자 추가");
-		getContentPane().setBackground(MyColor.ALICEBLUE);
+		setTitle("관리자 삭제"); //타이틀 설정
+		getContentPane().setBackground(MyColor.ALICEBLUE); //배경색
 		getContentPane().setLayout(null);
 
 		// 둥근 모서리
@@ -97,7 +102,7 @@ public class AdminInfoDeleteGUI extends JFrame{
 		lbl_tfDes2.setBounds(50, 160, 55, 25);
 		getContentPane().add(lbl_tfDes2);
 		
-		tf_password = new JPasswordField();
+		tf_password = new JPasswordField(); //패스워드 필드 사용
 		tf_password.setHorizontalAlignment(SwingConstants.RIGHT);
 		tf_password.setColumns(10);
 		tf_password.setBounds(125, 205, 210, 25);
@@ -128,7 +133,7 @@ public class AdminInfoDeleteGUI extends JFrame{
 		lbl_tfDes4.setBounds(50, 250, 55, 25);
 		getContentPane().add(lbl_tfDes4);
 		
-		JLabel lbl_tempMessage = new JLabel("tmpMsg");
+		JLabel lbl_tempMessage = new JLabel("tmpMsg"); //나중에 행동에 대한 결과값을 간단하게 표시해줄 라벨
 		lbl_tempMessage.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_tempMessage.setBounds(50, 300, 285, 30);
 		getContentPane().add(lbl_tempMessage);

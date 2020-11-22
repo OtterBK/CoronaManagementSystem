@@ -1,3 +1,8 @@
+//Front: 백인규
+//Back: 
+//Last Update : 20.11.23
+//Des : 확진자 신상정보 추가창
+
 package CoronaSystem.UserInterface;
 
 import java.awt.Color;
@@ -66,7 +71,7 @@ public class InformationAdd extends JFrame{
 		URL finderSrc = InformationAdd.class.getResource("/resources/finder.png");
 		ImageIcon finderIcon = MyUtility.resizeImage(new ImageIcon(finderSrc), 20, 20);
 		
-		URL homeSrc = LoginGUI.class.getResource("/resources/home.png");
+		URL homeSrc = InformationAdd.class.getResource("/resources/home.png");
 		ImageIcon homeIcon = MyUtility.resizeImage(new ImageIcon(homeSrc), 50, 50);
 		
 		JPanel topPanel = new JPanel();

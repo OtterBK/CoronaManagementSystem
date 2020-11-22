@@ -1,3 +1,9 @@
+//Front: 전재욱
+//Back: 최지혜
+//Last Update : 20.11.23
+//Des : 서버 메인화면
+
+
 package CoronaSystem.UserInterface;
 
 import java.awt.Color;
@@ -19,12 +25,19 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JButton;
+import java.awt.event.*;
+import java.awt.*;
 
 public class HomeGUI extends JFrame{
 
 	private int frameWidth = 500;
 	private int frameHeight = 600;
-	
+	private JLabel btn_adminInfoAdd2;
+	private JLabel btn_adminInfoDel2;
+	private JLabel lbl_coronicInfo_add;
+	private JLabel lbl_coronicInfo_edit;
+	private JLabel lbl_coronaMap_add;
+	private JLabel lbl_coronaMap_del;
 	public HomeGUI() {
 		setResizable(false);
 		Toolkit tk = Toolkit.getDefaultToolkit(); //사용자의 화면 크기값을 얻기위한 툴킷 클래스
@@ -112,7 +125,7 @@ public class HomeGUI extends JFrame{
 //		adminInfoPanel.add(btn_adminInfoAdd1);
 		
 		
-		JLabel btn_adminInfoAdd2 = new JLabel("계정 추가");
+		btn_adminInfoAdd2 = new JLabel("계정 추가");
 		btn_adminInfoAdd2.setIcon(checkIcon);
 		btn_adminInfoAdd2.setForeground(MyColor.WHITE);
 		btn_adminInfoAdd2.setFont(new Font("맑은 고딕", Font.BOLD, 15));
@@ -121,6 +134,7 @@ public class HomeGUI extends JFrame{
 		//btn_adminInfoAdd2.setOpaque(false);
 		//btn_adminInfoAdd2.setBorder(new LineBorder(MyColor.SMOOTHBLACK, 2));
 		adminInfoPanel.add(btn_adminInfoAdd2);
+		btn_adminInfoAdd2.addMouseListener(new LabelButton());
 		//클릭하면 계정 추가 프레임 열리게
 		
 //		JLabel btn_adminInfoDel1 = new JLabel(deleteIcon);
@@ -131,7 +145,7 @@ public class HomeGUI extends JFrame{
 //		adminInfoPanel.add(btn_adminInfoDel1);
 		
 		
-		JLabel btn_adminInfoDel2 = new JLabel("계정 삭제");
+		btn_adminInfoDel2 = new JLabel("계정 삭제");
 		btn_adminInfoDel2.setForeground(MyColor.WHITE);
 		btn_adminInfoDel2.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		btn_adminInfoDel2.setIcon(deleteIcon);
@@ -140,6 +154,7 @@ public class HomeGUI extends JFrame{
 		//btn_adminInfoDel2.setOpaque(false);
 		//btn_adminInfoDel2.setBorder(new LineBorder(MyColor.SMOOTHBLACK, 2));
 		adminInfoPanel.add(btn_adminInfoDel2);
+		btn_adminInfoDel2.addMouseListener(new LabelButton());
 		//클릭하면 계정 삭제 프레임 열리게
 		
 		JPanel coronicInfoPanel = new JPanel();
@@ -157,22 +172,24 @@ public class HomeGUI extends JFrame{
 		lbl_coronicInfoTitle.setBounds(22, 10, 200, 40);
 		coronicInfoPanel.add(lbl_coronicInfoTitle);
 		
-		JLabel lbl_coronicInfo_add = new JLabel("정보 추가");
+		lbl_coronicInfo_add = new JLabel("정보 추가");
 		lbl_coronicInfo_add.setIcon(checkIcon);
 		lbl_coronicInfo_add.setHorizontalAlignment(SwingConstants.LEFT);
 		lbl_coronicInfo_add.setForeground(Color.WHITE);
 		lbl_coronicInfo_add.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		lbl_coronicInfo_add.setBounds(75, 62, 100, 25);
 		coronicInfoPanel.add(lbl_coronicInfo_add);
+		lbl_coronicInfo_add.addMouseListener(new LabelButton());
 		//클릭하면 정보 추가 프레임 열리게
 		
-		JLabel lbl_coronicInfo_edit = new JLabel("정보 수정");
+		lbl_coronicInfo_edit = new JLabel("정보 수정");
 		lbl_coronicInfo_edit.setIcon(editIcon);
 		lbl_coronicInfo_edit.setHorizontalAlignment(SwingConstants.LEFT);
 		lbl_coronicInfo_edit.setForeground(Color.WHITE);
 		lbl_coronicInfo_edit.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		lbl_coronicInfo_edit.setBounds(245, 62, 100, 25);
 		coronicInfoPanel.add(lbl_coronicInfo_edit);
+		lbl_coronicInfo_edit.addMouseListener(new LabelButton());
 		//클릭하면 정보 수정 프레임 열리게
 		
 		JPanel coronaMapPanel = new JPanel();
@@ -191,30 +208,52 @@ public class HomeGUI extends JFrame{
 		coronaMapPanel.add(lbl_coronaMapTitle);
 
 		
-		JLabel lbl_coronaMap_add = new JLabel("정보 추가");
+		lbl_coronaMap_add = new JLabel("정보 추가");
 		lbl_coronaMap_add.setIcon(checkIcon);
 		lbl_coronaMap_add.setHorizontalAlignment(SwingConstants.LEFT);
 		lbl_coronaMap_add.setForeground(Color.WHITE);
 		lbl_coronaMap_add.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		lbl_coronaMap_add.setBounds(75, 62, 100, 25);
 		coronaMapPanel.add(lbl_coronaMap_add);
+		lbl_coronaMap_add.addMouseListener(new LabelButton());
 		//클릭하면 동선 정보 추가 프레임 열리게
 		
-		JLabel lbl_coronaMap_del = new JLabel("정보 삭제");
+		lbl_coronaMap_del = new JLabel("정보 삭제");
 		lbl_coronaMap_del.setIcon(deleteIcon);
 		lbl_coronaMap_del.setHorizontalAlignment(SwingConstants.LEFT);
 		lbl_coronaMap_del.setForeground(Color.WHITE);
 		lbl_coronaMap_del.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		lbl_coronaMap_del.setBounds(245, 62, 100, 25);
 		coronaMapPanel.add(lbl_coronaMap_del);
+		lbl_coronaMap_del.addMouseListener(new LabelButton());
 		// 클릭하면 동선 정보 삭제 프레임 열리게
 	
 		this.setVisible(true);
 		
 	}
 	
-	
-
+	private class LabelButton extends MouseAdapter{
+		public void mousePressed(MouseEvent e) {
+			if(e.getSource()==btn_adminInfoAdd2) {
+				new AdminInfoAddGUI();
+			}
+			else if(e.getSource()==btn_adminInfoDel2) {
+				new AdminInfoDeleteGUI();
+			}
+			else if(e.getSource()==lbl_coronicInfo_add) {
+				new InformationAdd();
+			}
+			else if(e.getSource()==lbl_coronicInfo_edit) {
+				//new AdminInfoAddGUI();//프로필 정보수정
+			}
+			else if(e.getSource()== lbl_coronaMap_add) {
+				new CoronaMapAdd();
+			}
+			else if(e.getSource()== lbl_coronaMap_del) {
+				//new AdminInfoAddGUI();//동선 정보 삭제
+			}	
+		}
+	}
 	private class JFrameWindowClosingEventHandler extends WindowAdapter { //창 닫기시
 		public void windowClosing(WindowEvent e) {
 			if(e.getWindow() instanceof LoginGUI) { //홈 화면 닫으면

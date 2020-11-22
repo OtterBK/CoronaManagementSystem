@@ -1,3 +1,8 @@
+//Front: 전재욱
+//Back: 전재욱
+//Last Update: 20.11.22
+//Des: 데이터베이스 통신용
+
 package Network;
 
 import java.sql.*;
@@ -25,7 +30,7 @@ public class MyDatabase { //데이터베이스 통신용
 		}
 	}
 	
-	public String getPassword(String id) { //ID값을 이용하여 LoginInfo(로그인정보 테이블)에서 PW 받아옴
+	public String getPassword(String id) { //ID값을 이용하여 AdminInfo(어드민정보 테이블)에서 PW 받아옴
 		String pw = null;
 		try {
 			ResultSet result = stmt.executeQuery("SELECT PW FROM AdminInfo where ID = '"+id+"'");
@@ -35,6 +40,18 @@ public class MyDatabase { //데이터베이스 통신용
 			e.printStackTrace();
 		}
 		return pw;
+	}
+	
+	public String getAdminName(String id) { //ID값을 이용하여 AdminInfo(어드민정보 테이블)에서  어드민명 받아옴
+		String adminName = null;
+		try {
+			ResultSet result = stmt.executeQuery("SELECT AdminName FROM AdminInfo where ID = '"+id+"'");
+			if(!result.next()) return null;
+			adminName = result.getString("adminName");
+		} catch (SQLException e) {		
+			e.printStackTrace();
+		}
+		return adminName;
 	}
 	
 	public boolean insertRegisterData(String id, String pw) { //LoginInfo(로그인정보 테이블)에 새로운 ID,PW삽입 또는 PW값 수정

@@ -1,3 +1,8 @@
+//Front: 전재욱
+//Back: 전재욱
+//Last Update : 20.11.23
+//Des : 간단한 알림 표시용, 프로그램 종료, 해당 알림을 띄운 창 종료 등 기능 제공
+
 package CoronaSystem.UserInterface;
 
 import java.awt.BorderLayout;
