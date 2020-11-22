@@ -52,25 +52,25 @@ public class CheckGUI extends JFrame{ //사용자에게 알림을 띄우기 위한 프레임
 		this.setResizable(false);
 		this.setBounds(screenSize.width / 2 - 125, screenSize.height / 2 - 75, 250, 150);
 		this.setTitle("확인");
-		URL src = CheckGUI.class.getResource("/resources/baricon.png"); //icon 이미지
+		URL src = CheckGUI.class.getResource("/resources/titleIcon.png"); //icon 이미지
 		ImageIcon icon = new ImageIcon(src);
 		this.setIconImage(icon.getImage());
 		
 		JPanel pane = new JPanel(); //메인 패널
-		pane.setBackground(MyColor.MIDNIGHTBLUE);
+		pane.setBackground(MyColor.ALICEBLUE);
 		pane.setLayout(new BorderLayout());	
 		
 		this.setContentPane(pane);
 		
 		JLabel msgLabel = new JLabel(msg); //알림 메시지 라벨
 		msgLabel.setFont(new Font("맑은 고딕", Font.PLAIN, (int)fontSize));
-		msgLabel.setForeground(MyColor.LIGHTYELLOW);
+		msgLabel.setForeground(MyColor.PLUSIANBLUE);
 		msgLabel.setHorizontalAlignment(JLabel.CENTER);
 		
 		okButton = new JButton("확인"); //확인 버튼
 		okButton.addActionListener(myActionEvent);
-		okButton.setBackground(MyColor.ORANGE);
-		okButton.setForeground(MyColor.NAVY);
+		okButton.setBackground(MyColor.MIDNIGHTBLUE);
+		okButton.setForeground(MyColor.WHITE);
 		
 		pane.add(msgLabel, BorderLayout.CENTER);
 		pane.add(okButton, BorderLayout.SOUTH);

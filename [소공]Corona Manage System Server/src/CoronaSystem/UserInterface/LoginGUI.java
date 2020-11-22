@@ -23,6 +23,7 @@ import javax.swing.border.LineBorder;
 import Addon.BubbleBorder;
 import Addon.MyColor;
 import Addon.MyUtility;
+import CoronaSystem.CoronaSystem;
 
 public class LoginGUI extends JFrame{
 
@@ -92,7 +93,7 @@ public class LoginGUI extends JFrame{
             @Override
             public void keyPressed(KeyEvent event) {
                 if(event.getKeyCode() == 10) { // 엔터키 키를 눌렀으면
-                	//tryLogin();
+                	tryLogin();
                 }
             }
         });
@@ -109,7 +110,7 @@ public class LoginGUI extends JFrame{
             @Override
             public void keyPressed(KeyEvent event) {
                 if(event.getKeyCode() == 10) { // 엔터키 키를 눌렀으면
-                	//tryLogin();
+                	tryLogin();
                 }
             }
         });
@@ -177,6 +178,19 @@ public class LoginGUI extends JFrame{
 				Character.toString(tmpCh); // 한글자씩 가져와서 string으로 합침
 				pw += tmpCh;
 			}		
+			
+			String resPW = CoronaSystem.database.getPassword(id); //데이터베이스에서 id를 이용하여 pw를 가져옴
+			if(resPW == null) { //데이터베이스에 해당 id가 없다면
+				new CheckGUI(this, "존재하지 않는 ID입니다.", false, false); //실패 메시지와 이유 전달
+			} else { 
+				if(!pw.equals(resPW)) { //데이터베이스의 pw값과 사용자가 보낸 pw값이 일치하지 않다면 
+					new CheckGUI(this, "비밀번호가 틀립니다.", false, false); //실패 메시지와 이유 전달
+				} else { 
+					new HomeGUI();
+					this.dispose();
+				}
+				
+			}
 		}
 	}
 	
