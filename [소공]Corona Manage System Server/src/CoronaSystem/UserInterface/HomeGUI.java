@@ -26,7 +26,7 @@ public class HomeGUI extends JFrame{
 	private int frameHeight = 600;
 	
 	public HomeGUI() {
-		setResizable(true);
+		setResizable(false);
 		Toolkit tk = Toolkit.getDefaultToolkit(); //사용자의 화면 크기값을 얻기위한 툴킷 클래스
 		
 		setSize(frameWidth,frameHeight);
@@ -57,6 +57,15 @@ public class HomeGUI extends JFrame{
 		
 		src = LoginGUI.class.getResource("/resources/delete.png");
 		ImageIcon deleteIcon = MyUtility.resizeImage(new ImageIcon(src), 20, 20);
+		
+		src = LoginGUI.class.getResource("/resources/profile.png");
+		ImageIcon profileIcon = MyUtility.resizeImage(new ImageIcon(src), 30, 30);
+		
+		src = LoginGUI.class.getResource("/resources/edit.png");
+		ImageIcon editIcon = MyUtility.resizeImage(new ImageIcon(src), 20, 20);
+		
+		src = LoginGUI.class.getResource("/resources/mapinfo.png");
+		ImageIcon mapInfoIcon = MyUtility.resizeImage(new ImageIcon(src), 30, 30);
 		
 		JPanel topPanel = new JPanel();
 		topPanel.setBounds(100, 30, 300, 70);
@@ -93,7 +102,7 @@ public class HomeGUI extends JFrame{
 		lb_adminInfoTitle.setForeground(MyColor.LIGHTYELLOW);
 		lb_adminInfoTitle.setFont(new Font("맑은 고딕", Font.BOLD, 18));
 		lb_adminInfoTitle.setHorizontalAlignment(SwingConstants.LEFT);
-		lb_adminInfoTitle.setBounds(22, 10, 150, 40);
+		lb_adminInfoTitle.setBounds(22, 10, 200, 40);
 		adminInfoPanel.add(lb_adminInfoTitle);
 		
 //		JLabel btn_adminInfoAdd1 = new JLabel(checkIcon);
@@ -130,6 +139,68 @@ public class HomeGUI extends JFrame{
 		//btn_adminInfoDel2.setOpaque(false);
 		//btn_adminInfoDel2.setBorder(new LineBorder(MyColor.SMOOTHBLACK, 2));
 		adminInfoPanel.add(btn_adminInfoDel2);
+		
+		JPanel coronicInfoPanel = new JPanel();
+		coronicInfoPanel.setLayout(null);
+		coronicInfoPanel.setBackground(new Color(70, 130, 180));
+		coronicInfoPanel.setBounds(50, 300, 400, 100);
+		coronicInfoPanel.setBorder(brdr);
+		getContentPane().add(coronicInfoPanel);
+		
+		JLabel lbl_coronicInfoTitle = new JLabel("확진자 프로필 정보");
+		lbl_coronicInfoTitle.setIcon(profileIcon);
+		lbl_coronicInfoTitle.setHorizontalAlignment(SwingConstants.LEFT);
+		lbl_coronicInfoTitle.setForeground(new Color(239, 249, 55));
+		lbl_coronicInfoTitle.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		lbl_coronicInfoTitle.setBounds(22, 10, 200, 40);
+		coronicInfoPanel.add(lbl_coronicInfoTitle);
+		
+		JLabel lbl_coronicInfo_add = new JLabel("정보 추가");
+		lbl_coronicInfo_add.setIcon(checkIcon);
+		lbl_coronicInfo_add.setHorizontalAlignment(SwingConstants.LEFT);
+		lbl_coronicInfo_add.setForeground(Color.WHITE);
+		lbl_coronicInfo_add.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		lbl_coronicInfo_add.setBounds(75, 62, 100, 25);
+		coronicInfoPanel.add(lbl_coronicInfo_add);
+		
+		JLabel lbl_coronicInfo_edit = new JLabel("정보 수정");
+		lbl_coronicInfo_edit.setIcon(editIcon);
+		lbl_coronicInfo_edit.setHorizontalAlignment(SwingConstants.LEFT);
+		lbl_coronicInfo_edit.setForeground(Color.WHITE);
+		lbl_coronicInfo_edit.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		lbl_coronicInfo_edit.setBounds(245, 62, 100, 25);
+		coronicInfoPanel.add(lbl_coronicInfo_edit);
+		
+		JPanel coronaMapPanel = new JPanel();
+		coronaMapPanel.setLayout(null);
+		coronaMapPanel.setBackground(new Color(70, 130, 180));
+		coronaMapPanel.setBounds(50, 450, 400, 100);
+		coronaMapPanel.setBorder(brdr);
+		getContentPane().add(coronaMapPanel);
+		
+		JLabel lbl_coronaMapTitle = new JLabel("확진자 동선 정보");
+		lbl_coronaMapTitle.setIcon(mapInfoIcon);
+		lbl_coronaMapTitle.setHorizontalAlignment(SwingConstants.LEFT);
+		lbl_coronaMapTitle.setForeground(new Color(239, 249, 55));
+		lbl_coronaMapTitle.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		lbl_coronaMapTitle.setBounds(22, 10, 200, 40);
+		coronaMapPanel.add(lbl_coronaMapTitle);
+		
+		JLabel lbl_coronaMap_add = new JLabel("정보 추가");
+		lbl_coronaMap_add.setIcon(checkIcon);
+		lbl_coronaMap_add.setHorizontalAlignment(SwingConstants.LEFT);
+		lbl_coronaMap_add.setForeground(Color.WHITE);
+		lbl_coronaMap_add.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		lbl_coronaMap_add.setBounds(75, 62, 100, 25);
+		coronaMapPanel.add(lbl_coronaMap_add);
+		
+		JLabel lbl_coronaMap_del = new JLabel("정보 삭제");
+		lbl_coronaMap_del.setIcon(deleteIcon);
+		lbl_coronaMap_del.setHorizontalAlignment(SwingConstants.LEFT);
+		lbl_coronaMap_del.setForeground(Color.WHITE);
+		lbl_coronaMap_del.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		lbl_coronaMap_del.setBounds(245, 62, 100, 25);
+		coronaMapPanel.add(lbl_coronaMap_del);
 	
 		this.setVisible(true);
 		
@@ -144,5 +215,4 @@ public class HomeGUI extends JFrame{
 			}	
 		}
 	}
-	
 }
