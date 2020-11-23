@@ -3,7 +3,7 @@
 //Last Update : 20.11.22
 //Des : 코로나 동선 추가 프레임
 
-package CoronaSystem.UserInterface;
+package coronamanagesystem.userinterface;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -24,9 +24,10 @@ import javax.swing.SwingConstants;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.LineBorder;
 
-import Addon.BubbleBorder;
-import Addon.MyColor;
-import Addon.MyUtility;
+import addon.BubbleBorder;
+import addon.MyColor;
+import addon.MyUtility;
+
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JTabbedPane;
@@ -35,7 +36,7 @@ import javax.swing.JComboBox;
 import javax.swing.Box;
 import java.awt.Dimension;
 
-public class CoronaMapAdd2 extends JFrame{
+public class CoronaMapDel extends JFrame{
 
 	private int frameWidth = 500;
 	private int frameHeight = 400;
@@ -43,13 +44,12 @@ public class CoronaMapAdd2 extends JFrame{
 	private JTextField textField;
 	private JLabel lblNewLabel_6;
 	
-	public CoronaMapAdd2() {
+	public CoronaMapDel() {
 		setResizable(false);
 		Toolkit tk = Toolkit.getDefaultToolkit(); //사용자의 화면 크기값을 얻기위한 툴킷 클래스
 		
 		setSize(frameWidth,frameHeight);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		addWindowListener(new JFrameWindowClosingEventHandler()); //창 닫기 이벤트
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds((int) tk.getScreenSize().getWidth() / 2 - frameWidth /2, (int) tk.getScreenSize().getHeight() / 2 - frameHeight/2, frameWidth, frameHeight);
 		
 		setTitle("코로나 관리 시스템 - 로그인");
@@ -61,17 +61,17 @@ public class CoronaMapAdd2 extends JFrame{
 		AbstractBorder brdr = new BubbleBorder(Color.BLACK,2,16,0);
 		
 		//리소스 미리 불러오기
-		URL titleIconSrc = CoronaMapAdd2.class.getResource("/resources/titleIcon.png");
+		URL titleIconSrc = CoronaMapDel.class.getResource("/resources/titleIcon.png");
 		ImageIcon titleIcon = MyUtility.resizeImage(new ImageIcon(titleIconSrc), 70, 70);
 		setIconImage(titleIcon.getImage());
 		
-		URL logoSrc = CoronaMapAdd2.class.getResource("/resources/logo.png");
+		URL logoSrc = CoronaMapDel.class.getResource("/resources/logo.png");
 		ImageIcon logoIcon = MyUtility.resizeImage(new ImageIcon(logoSrc), 70, 70);
 		
-		URL finderSrc = CoronaMapAdd2.class.getResource("/resources/finder.png");
+		URL finderSrc = CoronaMapDel.class.getResource("/resources/finder.png");
 		ImageIcon finderIcon = MyUtility.resizeImage(new ImageIcon(finderSrc), 20, 20);
 		
-		URL homeSrc = CoronaMapAdd2.class.getResource("/resources/home.png");
+		URL homeSrc = CoronaMapDel.class.getResource("/resources/home.png");
 		ImageIcon homeIcon = MyUtility.resizeImage(new ImageIcon(homeSrc), 50, 50);
 	
 		
@@ -152,15 +152,5 @@ public class CoronaMapAdd2 extends JFrame{
 		
 		setVisible(true);	
 	}
-	
-	
-	
-	
-	private class JFrameWindowClosingEventHandler extends WindowAdapter { //창 닫기시
-		public void windowClosing(WindowEvent e) {
-			if(e.getWindow() instanceof CoronaMapAdd2) { //홈 화면 닫으면
-				System.exit(0); //프로그램 종료
-			}	
-		}
-	}
+
 }

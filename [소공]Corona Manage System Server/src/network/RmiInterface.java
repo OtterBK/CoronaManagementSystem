@@ -3,7 +3,7 @@
 //Last Update : 20.11.20
 //RMI 통신 인터페이스
 
-package Network;
+package network;
 
 public interface RmiInterface {
     public String getResponse(String data);

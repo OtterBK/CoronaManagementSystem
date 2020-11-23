@@ -3,7 +3,7 @@
 //Last Update : 20.11.23
 //Des : µÕ±Ù Å×µÎ¸®
 
-package Addon;
+package addon;
 
 import java.awt.BasicStroke;
 import java.awt.Color;

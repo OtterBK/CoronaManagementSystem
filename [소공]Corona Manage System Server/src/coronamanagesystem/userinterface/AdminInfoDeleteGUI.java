@@ -3,13 +3,15 @@
 //Last Update : 20.11.23
 //Des : 데이터베이스에서 관리자 정보 삭제할 수 있는 프레임 및 기능
 
-package CoronaSystem.UserInterface;
+package coronamanagesystem.userinterface;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.net.URL;
 
 import javax.swing.ImageIcon;
@@ -21,11 +23,13 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.text.AbstractDocument;
 
-import Addon.BubbleBorder;
-import Addon.MyColor;
-import Addon.MyUtility;
-import CoronaSystem.CoronaSystem;
+import addon.BubbleBorder;
+import addon.IDFilter;
+import addon.MyColor;
+import addon.MyUtility;
+import coronamanagesystem.CoronaSystem;
 
 import javax.swing.JButton;
 
@@ -84,7 +88,18 @@ public class AdminInfoDeleteGUI extends JFrame{
 		tf_id.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		tf_id.setBackground(MyColor.LIGHTGRAY);
 		tf_id.setForeground(Color.black);
-		tf_id.setBorder(new LineBorder(MyColor.WHITE, 2));	
+		tf_id.setBorder(new LineBorder(MyColor.WHITE, 2));
+		((AbstractDocument) tf_id.getDocument()).setDocumentFilter(new IDFilter()); //알파벳, 숫자만 허용
+		tf_id.addKeyListener(new KeyAdapter() {
+			 @Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (!Character.isDigit(c) || !Character.isAlphabetic(c)) { // 숫자나 알파벳만 입력가능
+					e.consume();
+				}
+
+			}
+		});
 		getContentPane().add(tf_id);
 		
 		JLabel lbl_tfDes2 = new JLabel("ID");
@@ -110,7 +125,7 @@ public class AdminInfoDeleteGUI extends JFrame{
 		lbl_tfDes3.setForeground(MyColor.PLUSIANBLUE);
 		getContentPane().add(lbl_tfDes3);
 		
-		lbl_tempMessage = new JLabel("tmpMsg"); //나중에 행동에 대한 결과값을 간단하게 표시해줄 라벨
+		lbl_tempMessage = new JLabel(""); //나중에 행동에 대한 결과값을 간단하게 표시해줄 라벨
 		lbl_tempMessage.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_tempMessage.setBounds(50, 300, 285, 30);
 		lbl_tempMessage.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
@@ -130,13 +145,13 @@ public class AdminInfoDeleteGUI extends JFrame{
 				String inputPw = tf_password.getText();
 				String pw = CoronaSystem.database.getPassword(inputId);
 				if(pw == null) {
-					lbl_tempMessage.setText("존재하지 않는 ID 입니다.");
+					sendTempMsg("존재하지 않는 ID 입니다.");
 				} else {
 					if(pw.equals(inputPw)) {
 						CoronaSystem.database.deleteAdminInfo(inputId);
-						lbl_tempMessage.setText(inputId+" 계정이 삭제됐습니다.");	
+						sendTempMsg(inputId+" 계정이 삭제됐습니다.");	
 					} else {
-						lbl_tempMessage.setText("잘못된 패스워드입니다.");
+						sendTempMsg("잘못된 패스워드입니다.");
 					}
 				}
 				

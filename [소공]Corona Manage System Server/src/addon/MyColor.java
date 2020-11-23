@@ -2,7 +2,7 @@
 //Last Update : 20.11.23
 //Des : »ö»ó
 
-package Addon;
+package addon;
 
 import java.awt.Color;
 

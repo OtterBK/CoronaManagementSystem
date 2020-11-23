@@ -3,13 +3,15 @@
 //Last Update : 20.11.23
 //Des: 비밀번호 찾기 기능 및 프레임창
 
-package CoronaSystem.UserInterface;
+package coronamanagesystem.userinterface;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.net.URL;
 
 import javax.swing.ImageIcon;
@@ -21,11 +23,13 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.text.AbstractDocument;
 
-import Addon.BubbleBorder;
-import Addon.MyColor;
-import Addon.MyUtility;
-import CoronaSystem.CoronaSystem;
+import addon.BubbleBorder;
+import addon.IDFilter;
+import addon.MyColor;
+import addon.MyUtility;
+import coronamanagesystem.CoronaSystem;
 
 public class FindPasswordGUI extends JFrame{
 	
@@ -107,7 +111,18 @@ public class FindPasswordGUI extends JFrame{
 		tf_id.setBounds(110, 120, 210, 25);
 		tf_id.setBackground(MyColor.LIGHTGRAY);
 		tf_id.setForeground(Color.black);
-		tf_id.setBorder(new LineBorder(MyColor.WHITE, 2));	
+		tf_id.setBorder(new LineBorder(MyColor.WHITE, 2));
+		((AbstractDocument) tf_id.getDocument()).setDocumentFilter(new IDFilter()); //알파벳, 숫자만 허용
+		tf_id.addKeyListener(new KeyAdapter() {           
+            @Override
+            public void keyTyped(KeyEvent e) {
+            	JTextField tf = (JTextField) e.getSource();
+            	if(tf.getText().length() >= 12) { //12자 이상 입력 못하게 제한
+            		e.consume();
+            	}     	
+            	
+            }
+        });
 		getContentPane().add(tf_id);
 		
 		JLabel lbl_tfDes2 = new JLabel("ID");

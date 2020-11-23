@@ -1,4 +1,4 @@
-package Addon;
+package addon;
 
 import java.awt.Image;
 import java.util.ArrayList;
@@ -39,6 +39,18 @@ public class MyUtility {
 		}
 		str = str.replaceAll("(\r|\n|\r\n|\n\r)","<br>");//개행기호변환
 		return str = "<html><body>" + str + "</body></html>"; //값 반환
+	}
+	
+	public static boolean isAlphabet(String str) { //문자열에 대한 알파벳 확인
+		if(str.matches("[a-z]") || str.matches("[A-Z]")) {
+			return true;
+		} else return false;
+	}
+	
+	public static boolean isDigit(String str) { //문자열에 대한 숫자 확인
+		if(str.matches("[0-9]")) {
+			return true;
+		} else return false;
 	}
 	
 	//min ~ max 중 값 1개 반환

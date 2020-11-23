@@ -3,13 +3,13 @@
 //Last Update : 20.11.20
 //Des: 네트워크 통신 메서드
 
-package Network;
+package network;
 
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import Addon.MyUtility;
+import addon.MyUtility;
 import net.sf.lipermi.exception.LipeRMIException;
 import net.sf.lipermi.handler.CallHandler;
 import net.sf.lipermi.net.IServerListener;

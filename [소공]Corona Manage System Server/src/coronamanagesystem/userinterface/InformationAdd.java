@@ -3,7 +3,7 @@
 //Last Update : 20.11.23
 //Des : 확진자 신상정보 추가창
 
-package CoronaSystem.UserInterface;
+package coronamanagesystem.userinterface;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -24,9 +24,10 @@ import javax.swing.SwingConstants;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.LineBorder;
 
-import Addon.BubbleBorder;
-import Addon.MyColor;
-import Addon.MyUtility;
+import addon.BubbleBorder;
+import addon.MyColor;
+import addon.MyUtility;
+
 import javax.swing.JButton;
 
 public class InformationAdd extends JFrame{
@@ -48,8 +49,7 @@ public class InformationAdd extends JFrame{
 		Toolkit tk = Toolkit.getDefaultToolkit(); //사용자의 화면 크기값을 얻기위한 툴킷 클래스
 		
 		setSize(frameWidth,frameHeight);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		addWindowListener(new JFrameWindowClosingEventHandler()); //창 닫기 이벤트
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds((int) tk.getScreenSize().getWidth() / 2 - frameWidth /2, (int) tk.getScreenSize().getHeight() / 2 - frameHeight/2, frameWidth, frameHeight);
 		
 		setTitle("확진자 프로필 정보 추가");
@@ -179,14 +179,4 @@ public class InformationAdd extends JFrame{
 		setVisible(true);	
 	}
 	
-	
-	
-	
-	private class JFrameWindowClosingEventHandler extends WindowAdapter { //창 닫기시
-		public void windowClosing(WindowEvent e) {
-			if(e.getWindow() instanceof InformationAdd) { //홈 화면 닫으면
-				System.exit(0); //프로그램 종료
-			}	
-		}
-	}
 }

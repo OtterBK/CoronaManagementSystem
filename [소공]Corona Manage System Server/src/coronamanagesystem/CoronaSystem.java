@@ -3,16 +3,11 @@
 //Last Update : 20.11.23
 //Des: 소프트웨어 공학 코로나 동선 파악 및 조회 시스템의 서버 부분
 
-package CoronaSystem;
+package coronamanagesystem;
 
-import CoronaSystem.UserInterface.AdminInfoAddGUI;
-import CoronaSystem.UserInterface.AdminInfoDeleteGUI;
-import CoronaSystem.UserInterface.CoronaMapAdd;
-import CoronaSystem.UserInterface.HomeGUI;
-import CoronaSystem.UserInterface.InformationAdd;
-import CoronaSystem.UserInterface.LoginGUI;
-import Network.MyDatabase;
-import Network.RmiServer;
+import coronamanagesystem.userinterface.LoginGUI;
+import network.MyDatabase;
+import network.RmiServer;
 
 public class CoronaSystem {
 

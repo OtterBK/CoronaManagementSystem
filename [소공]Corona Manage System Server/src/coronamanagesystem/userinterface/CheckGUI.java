@@ -3,7 +3,7 @@
 //Last Update : 20.11.23
 //Des : 간단한 알림 표시용, 프로그램 종료, 해당 알림을 띄운 창 종료 등 기능 제공
 
-package CoronaSystem.UserInterface;
+package coronamanagesystem.userinterface;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -21,8 +21,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import Addon.MyColor;
-import Addon.MyUtility;
+import addon.MyColor;
+import addon.MyUtility;
 
 public class CheckGUI extends JFrame{ //사용자에게 알림을 띄우기 위한 프레임
 	

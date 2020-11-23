@@ -3,7 +3,7 @@
 //Last Update : 20.11.23
 //Des: 로그인 프레임 및 디자인
 
-package CoronaSystem.UserInterface;
+package coronamanagesystem.userinterface;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.net.URL;
@@ -27,11 +28,13 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.text.AbstractDocument;
 
-import Addon.BubbleBorder;
-import Addon.MyColor;
-import Addon.MyUtility;
-import CoronaSystem.CoronaSystem;
+import addon.BubbleBorder;
+import addon.IDFilter;
+import addon.MyColor;
+import addon.MyUtility;
+import coronamanagesystem.CoronaSystem;
 
 public class LoginGUI extends JFrame{
 
@@ -98,27 +101,17 @@ public class LoginGUI extends JFrame{
 		tf_id.setBackground(MyColor.LIGHTGRAY);
 		tf_id.setForeground(Color.black);
 		tf_id.setBorder(new LineBorder(MyColor.WHITE, 2));
+		((AbstractDocument) tf_id.getDocument()).setDocumentFilter(new IDFilter()); //알파벳, 숫자만 입력
 		tf_id.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent event) {
-                if(event.getKeyCode() == 10) { // 엔터키 키를 눌렀으면
-                	tryLogin(); //로그인 시도
-                } 
-            }
-            
-            @Override
+			
+			@Override
             public void keyTyped(KeyEvent e) {
-//            	char c = e.getKeyChar(); 숫자만 입력 받을 때 사용
-//            	if(!Character.isDigit(c)) {
-//            		e.consume();
-//            	}
-            	
             	JTextField tf = (JTextField) e.getSource();
-            	if(tf.getText().length() >= 12) { //12자 이상 입력 못하게 제한
+            	if(tf.getText().length() >= 14) { //12자 이상 입력 못하게 제한
             		e.consume();
             	}
             }
-        });
+		});
 		
 		tf_pw = new JPasswordField();
 		tf_pw.setHorizontalAlignment(SwingConstants.RIGHT);

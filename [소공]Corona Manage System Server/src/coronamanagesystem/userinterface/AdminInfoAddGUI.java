@@ -3,7 +3,7 @@
 //Last Update : 20.11.23
 //Des : 데이터베이스에 관리자 정보 추가할 수 있는 프레임 및 기능
 
-package CoronaSystem.UserInterface;
+package coronamanagesystem.userinterface;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -15,6 +15,7 @@ import java.awt.event.KeyEvent;
 import java.net.URL;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -23,13 +24,13 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.text.AbstractDocument;
 
-import Addon.BubbleBorder;
-import Addon.MyColor;
-import Addon.MyUtility;
-import CoronaSystem.CoronaSystem;
-
-import javax.swing.JButton;
+import addon.BubbleBorder;
+import addon.IDFilter;
+import addon.MyColor;
+import addon.MyUtility;
+import coronamanagesystem.CoronaSystem;
 
 public class AdminInfoAddGUI extends JFrame{
 
@@ -121,14 +122,16 @@ public class AdminInfoAddGUI extends JFrame{
 		tf_id.setForeground(Color.black);
 		tf_id.setBorder(new LineBorder(MyColor.WHITE, 2));
 		tf_id.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		((AbstractDocument) tf_id.getDocument()).setDocumentFilter(new IDFilter()); //알파벳, 숫자만 허용
 		tf_id.addKeyListener(new KeyAdapter() { //id는 12글자까지만 입력가능
 			
 			 @Override
 	            public void keyTyped(KeyEvent e) {
-				 JTextField tf = (JTextField) e.getSource();
-	            	if(tf.getText().length() >= 12) {
+	            	JTextField tf = (JTextField) e.getSource();
+	            	if(tf.getText().length() >= 12) { //12자 이상 입력 못하게 제한
 	            		e.consume();
-	            	}
+	            	}      	
+	            	
 	            }
 			
 		});
@@ -196,7 +199,7 @@ public class AdminInfoAddGUI extends JFrame{
 		lbl_tfDes4.setBounds(50, 250, 55, 25);
 		getContentPane().add(lbl_tfDes4);
 		
-		lbl_tempMessage = new JLabel("tmpMsg");
+		lbl_tempMessage = new JLabel("");
 		lbl_tempMessage.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_tempMessage.setBounds(50, 300, 285, 30);
 		lbl_tempMessage.setFont(new Font("맑은 고딕", Font.PLAIN, 15));

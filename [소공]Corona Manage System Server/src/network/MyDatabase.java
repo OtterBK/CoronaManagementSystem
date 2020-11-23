@@ -3,7 +3,7 @@
 //Last Update: 20.11.22
 //Des: 데이터베이스 통신용
 
-package Network;
+package network;
 
 import java.sql.*;
 
@@ -94,6 +94,25 @@ public class MyDatabase { //데이터베이스 통신용
 		}
 		return args;
 	}
+	
+	public String[] getPatientInfo(String id) { //coronicInfo(사용자 정보 테이블)에서 환자 ID값을 이용하여 정보를 불러옴
+        String args[] = new String[7];
+        try {
+            ResultSet result = stmt.executeQuery("SELECT * FROM coronicInfo where ID = '"+id+"'");//여기는 환자 아이디로
+            if(!result.next()) return null;
+            args[0] = result.getString("이름");
+            args[1] = result.getString("나이");
+            args[2] = result.getString("성별");
+            args[3] = result.getString("거주지");
+            args[4] = result.getString("년");
+            args[5] = result.getString("월");
+            args[6] = result.getString("일");
+        } catch (SQLException e) {
+            args = null;
+            e.printStackTrace();
+        }
+        return args;
+    }
 	
 	public boolean insertUserInfo(String id, String name, String telNum, String nickName) { //UserInfo(사용자 정보 테이블에) 새로운 값 삽입 또는 수정
 		try {

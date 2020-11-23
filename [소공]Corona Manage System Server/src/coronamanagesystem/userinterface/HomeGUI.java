@@ -4,7 +4,7 @@
 //Des : 서버 메인화면
 
 
-package CoronaSystem.UserInterface;
+package coronamanagesystem.userinterface;
 
 import java.awt.Color;
 import java.awt.Toolkit;
@@ -17,9 +17,10 @@ import javax.swing.JFrame;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.LineBorder;
 
-import Addon.BubbleBorder;
-import Addon.MyColor;
-import Addon.MyUtility;
+import addon.BubbleBorder;
+import addon.MyColor;
+import addon.MyUtility;
+
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -38,6 +39,8 @@ public class HomeGUI extends JFrame{
 	private JLabel lbl_coronicInfo_edit;
 	private JLabel lbl_coronaMap_add;
 	private JLabel lbl_coronaMap_del;
+	private JLabel lbl_coronaMap_find;
+	
 	public HomeGUI() {
 		setResizable(false);
 		Toolkit tk = Toolkit.getDefaultToolkit(); //사용자의 화면 크기값을 얻기위한 툴킷 클래스
@@ -55,30 +58,33 @@ public class HomeGUI extends JFrame{
 		AbstractBorder brdr = new BubbleBorder(Color.BLACK, 2, 16, 0);
 
 		// 리소스 미리 불러오기
-		URL titleIconSrc = LoginGUI.class.getResource("/resources/titleIcon.png");
+		URL titleIconSrc = HomeGUI.class.getResource("/resources/titleIcon.png");
 		ImageIcon titleIcon = MyUtility.resizeImage(new ImageIcon(titleIconSrc), 70, 70);
 		setIconImage(titleIcon.getImage());
 
-		URL homeSrc = LoginGUI.class.getResource("/resources/home.png");
+		URL homeSrc = HomeGUI.class.getResource("/resources/home.png");
 		ImageIcon homeIcon = MyUtility.resizeImage(new ImageIcon(homeSrc), 50, 50);
 
-		URL settingSrc = LoginGUI.class.getResource("/resources/settingIcon.png");
+		URL settingSrc = HomeGUI.class.getResource("/resources/settingIcon.png");
 		ImageIcon settingIcon = MyUtility.resizeImage(new ImageIcon(settingSrc), 30, 30);
 		
-		URL src = LoginGUI.class.getResource("/resources/check.png");
+		URL src = HomeGUI.class.getResource("/resources/check.png");
 		ImageIcon checkIcon = MyUtility.resizeImage(new ImageIcon(src), 20, 20);
 		
-		src = LoginGUI.class.getResource("/resources/delete.png");
+		src = HomeGUI.class.getResource("/resources/delete.png");
 		ImageIcon deleteIcon = MyUtility.resizeImage(new ImageIcon(src), 20, 20);
 		
-		src = LoginGUI.class.getResource("/resources/profile.png");
+		src = HomeGUI.class.getResource("/resources/profile.png");
 		ImageIcon profileIcon = MyUtility.resizeImage(new ImageIcon(src), 30, 30);
 		
-		src = LoginGUI.class.getResource("/resources/edit.png");
+		src = HomeGUI.class.getResource("/resources/edit.png");
 		ImageIcon editIcon = MyUtility.resizeImage(new ImageIcon(src), 20, 20);
 		
-		src = LoginGUI.class.getResource("/resources/mapinfo.png");
+		src = HomeGUI.class.getResource("/resources/mapinfo.png");
 		ImageIcon mapInfoIcon = MyUtility.resizeImage(new ImageIcon(src), 30, 30);
+		
+		src = HomeGUI.class.getResource("/resources/inquiry.png");
+		ImageIcon inquiryIcon = MyUtility.resizeImage(new ImageIcon(src), 20, 20);
 		
 		JPanel topPanel = new JPanel();
 		topPanel.setBounds(100, 30, 300, 70);
@@ -213,7 +219,7 @@ public class HomeGUI extends JFrame{
 		lbl_coronaMap_add.setHorizontalAlignment(SwingConstants.LEFT);
 		lbl_coronaMap_add.setForeground(Color.WHITE);
 		lbl_coronaMap_add.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		lbl_coronaMap_add.setBounds(75, 62, 100, 25);
+		lbl_coronaMap_add.setBounds(150, 62, 100, 25);
 		coronaMapPanel.add(lbl_coronaMap_add);
 		lbl_coronaMap_add.addMouseListener(new LabelButton());
 		//클릭하면 동선 정보 추가 프레임 열리게
@@ -223,8 +229,16 @@ public class HomeGUI extends JFrame{
 		lbl_coronaMap_del.setHorizontalAlignment(SwingConstants.LEFT);
 		lbl_coronaMap_del.setForeground(Color.WHITE);
 		lbl_coronaMap_del.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		lbl_coronaMap_del.setBounds(245, 62, 100, 25);
+		lbl_coronaMap_del.setBounds(290, 62, 100, 25);
 		coronaMapPanel.add(lbl_coronaMap_del);
+		
+		lbl_coronaMap_find = new JLabel("정보 조회");
+		lbl_coronaMap_find.setIcon(inquiryIcon);
+		lbl_coronaMap_find.setHorizontalAlignment(SwingConstants.LEFT);
+		lbl_coronaMap_find.setForeground(Color.WHITE);
+		lbl_coronaMap_find.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		lbl_coronaMap_find.setBounds(10, 62, 100, 25);
+		coronaMapPanel.add(lbl_coronaMap_find);
 		lbl_coronaMap_del.addMouseListener(new LabelButton());
 		// 클릭하면 동선 정보 삭제 프레임 열리게
 	
@@ -244,13 +258,13 @@ public class HomeGUI extends JFrame{
 				new InformationAdd();
 			}
 			else if(e.getSource()==lbl_coronicInfo_edit) {
-				//new AdminInfoAddGUI();//프로필 정보수정
+				new InformationChange();//프로필 정보수정
 			}
 			else if(e.getSource()== lbl_coronaMap_add) {
 				new CoronaMapAdd();
 			}
 			else if(e.getSource()== lbl_coronaMap_del) {
-				//new AdminInfoAddGUI();//동선 정보 삭제
+				new CoronaMapDel();//동선 정보 삭제
 			}	
 		}
 	}
