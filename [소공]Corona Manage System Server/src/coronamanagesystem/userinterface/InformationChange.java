@@ -1,13 +1,15 @@
-//Front: 백인규
-//Back: 최지혜
+//Front: 김태연
+//Back: 
 //Last Update : 20.11.22
-//Des : 확진자 정보 수정 프레임
+//Des : 코로나 동선 추가 프레임
 
 package coronamanagesystem.userinterface;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
@@ -15,42 +17,45 @@ import java.awt.event.WindowEvent;
 import java.net.URL;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.LineBorder;
 
 import addon.BubbleBorder;
 import addon.MyColor;
 import addon.MyUtility;
-
-import javax.swing.JButton;
+import coronamanagesystem.CoronaSystem;
 
 public class InformationChange extends JFrame{
 
+	private static final ActionListener ActionListener = null;
 	private int frameWidth = 500;
 	private int frameHeight = 400;
-	private JButton btn_findPassword;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JButton btn_confirm;	
+	private JTextField tf_id0;
+	private JTextField tf_name;
+	private JTextField tf_age0;//이름 입력 텍스트 필드
+	private JTextField tf_gender;
+	private JTextField tf_address;//성별
+	private JTextField tf_year;//거주지
 	private JLabel lblNewLabel_6;
-	private JTextField textField_6;
-	private JTextField textField_5;
-	private JTextField textField_7;
+	//년
+	private JTextField tf_month;//월
+	private JTextField tf_date;//일
+	private JLabel lbl_tempMessage;
+	private JFrame frame;
 	
 	public InformationChange() {
+		frame = this;
 		setResizable(false);
 		Toolkit tk = Toolkit.getDefaultToolkit(); //사용자의 화면 크기값을 얻기위한 툴킷 클래스
 		
 		setSize(frameWidth,frameHeight);
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		addWindowListener(new JFrameWindowClosingEventHandler()); //창 닫기 이벤트
 		setBounds((int) tk.getScreenSize().getWidth() / 2 - frameWidth /2, (int) tk.getScreenSize().getHeight() / 2 - frameHeight/2, frameWidth, frameHeight);
 		
 		setTitle("확진자 프로필 정보 수정");
@@ -81,16 +86,7 @@ public class InformationChange extends JFrame{
 		lblNewLabel_6.setBounds(390, 15, 50, 50);
 		getContentPane().add(lblNewLabel_6);
 		
-		btn_findPassword = new JButton("\uD655\uC778");
-		btn_findPassword.setHorizontalAlignment(SwingConstants.RIGHT);
-		btn_findPassword.setFont(new Font("맑은 고딕", Font.BOLD, 18));
-		btn_findPassword.setBounds(413, 326, 57, 35);
-		btn_findPassword.setOpaque(false);
-		btn_findPassword.setBorder(null);
-		btn_findPassword.setContentAreaFilled(false);
-		btn_findPassword.setFocusable(false);
-		btn_findPassword.setForeground(MyColor.SLATEGRAY);
-		getContentPane().add(btn_findPassword);
+
 		
 		JLabel lblNewLabel = new JLabel("   \uD655\uC9C4\uC790 \uD504\uB85C\uD544 \uC815\uBCF4 \uC218\uC815");
 		lblNewLabel.setBackground(MyColor.LIGHTSKY);
@@ -108,16 +104,11 @@ public class InformationChange extends JFrame{
 		lblNewLabel_1.setForeground(MyColor.PLUSIANBLUE);
 		getContentPane().add(lblNewLabel_1);
 		
-		textField = new JTextField();
-		textField.setBounds(184, 80, 150, 25);
-		getContentPane().add(textField);
-		textField.setColumns(10);
-		
-		JLabel lblNewLabel_2 = new JLabel("\uB098\uC774");
-		lblNewLabel_2.setFont(new Font("맑은 고딕", Font.BOLD, 12));
-		lblNewLabel_2.setBounds(50, 165, 50, 15);
-		lblNewLabel_2.setForeground(MyColor.PLUSIANBLUE);
-		getContentPane().add(lblNewLabel_2);
+		JLabel lbl_age = new JLabel("\uB098\uC774");
+		lbl_age.setFont(new Font("맑은 고딕", Font.BOLD, 12));
+		lbl_age.setBounds(50, 165, 50, 15);
+		lbl_age.setForeground(MyColor.PLUSIANBLUE);
+		getContentPane().add(lbl_age);
 		
 		JLabel lblNewLabel_3 = new JLabel("\uC131\uBCC4");
 		lblNewLabel_3.setFont(new Font("맑은 고딕", Font.BOLD, 12));
@@ -137,64 +128,155 @@ public class InformationChange extends JFrame{
 		lblNewLabel_5.setForeground(MyColor.PLUSIANBLUE);
 		getContentPane().add(lblNewLabel_5);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(184, 165, 270, 20);
-		getContentPane().add(textField_1);
-		textField_1.setColumns(10);
-		textField_1.setForeground(Color.black);
-		textField_1.setBorder(new LineBorder(MyColor.WHITE, 2));	
-		getContentPane().add(textField_1);
+		tf_id0 = new JTextField();
+		tf_id0.setForeground(Color.BLACK);
+		tf_id0.setColumns(10);
+		tf_id0.setBorder(new LineBorder(MyColor.WHITE, 2));
+		tf_id0.setBounds(180, 80, 120, 35);
+		tf_id0.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent event) {
+            }
+            
+            @Override
+	       	 public void keyTyped(KeyEvent e) {
+	      		  char c = e.getKeyChar();
+	      		  
+	      		  if (!Character.isDigit(c)) {
+	      			 new CheckGUI(frame, "ID를 숫자로 입력하여 주세요.", false, false); //실패 메시지와 이유 전달
+	      			//tf_id0.setText("");
+	      			 e.consume();
+	      			 return;
+	      		  }
+	      	}
+	     });
+		getContentPane().add(tf_id0);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(184, 200, 270, 20);
-		getContentPane().add(textField_2);
-		textField_2.setColumns(10);
-		textField_2.setForeground(Color.black);
-		textField_2.setBorder(new LineBorder(MyColor.WHITE, 2));	
-		getContentPane().add(textField_2);
+		tf_name = new JTextField();
+		tf_name.setForeground(Color.BLACK);
+		tf_name.setColumns(10);
+		tf_name.setBorder(new LineBorder(MyColor.WHITE, 2));
+		tf_name.setBounds(184, 130, 270, 20);
+		getContentPane().add(tf_name);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(184, 235, 270, 20);
-		getContentPane().add(textField_3);
-		textField_3.setColumns(10);
-		textField_3.setForeground(Color.black);
-		textField_3.setBorder(new LineBorder(MyColor.WHITE, 2));	
-		getContentPane().add(textField_3);
+		tf_age0 = new JTextField();
+		tf_age0.setBounds(184, 165, 270, 20);
+		getContentPane().add(tf_age0);
+		tf_age0.setColumns(10);
+		tf_age0.setForeground(Color.black);
+		tf_age0.setBorder(new LineBorder(MyColor.WHITE, 2));
+		tf_age0.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent event) {
+            }
+            
+            @Override
+	       	 public void keyTyped(KeyEvent e) {
+	      		  char c = e.getKeyChar();
+	      		  
+	      		  if (!Character.isDigit(c)) {
+	      			 new CheckGUI(frame, "나이를 숫자로 입력하여 주세요.", false, false); //실패 메시지와 이유 전달
+	      			 tf_age0.setText("");
+	      			 e.consume();
+	      			 return;
+	      		  }
+	      	}
+	     });
+		getContentPane().add(tf_age0);
 		
-		textField_4 = new JTextField();
-		textField_4.setBounds(184, 270, 90, 20);
-		getContentPane().add(textField_4);
-		textField_4.setColumns(10);
-		textField_4.setForeground(Color.black);
-		textField_4.setBorder(new LineBorder(MyColor.WHITE, 2));	
-		getContentPane().add(textField_4);
+		tf_gender = new JTextField();
+		tf_gender.setBounds(184, 200, 270, 20);
+		getContentPane().add(tf_gender);
+		tf_gender.setColumns(10);
+		tf_gender.setForeground(Color.black);
+		tf_gender.setBorder(new LineBorder(MyColor.WHITE, 2));	
+		getContentPane().add(tf_gender);
 		
-		JLabel lblNewLabel_2_1 = new JLabel("\uC774\uB984");
-		lblNewLabel_2_1.setFont(new Font("맑은 고딕", Font.BOLD, 12));
-		lblNewLabel_2_1.setBounds(50, 130, 57, 15);
-		lblNewLabel_2_1.setForeground(MyColor.PLUSIANBLUE);
-		getContentPane().add(lblNewLabel_2_1);
+		tf_address = new JTextField();
+		tf_address.setBounds(184, 235, 270, 20);
+		getContentPane().add(tf_address);
+		tf_address.setColumns(10);
+		tf_address.setForeground(Color.black);
+		tf_address.setBorder(new LineBorder(MyColor.WHITE, 2));	
 		
-		textField_6 = new JTextField();
-		textField_6.setForeground(Color.BLACK);
-		textField_6.setColumns(10);
-		textField_6.setBorder(new LineBorder(MyColor.WHITE, 2));
-		textField_6.setBounds(184, 130, 270, 20);
-		getContentPane().add(textField_6);
+		getContentPane().add(tf_address);
 		
-		textField_5 = new JTextField();
-		textField_5.setForeground(Color.BLACK);
-		textField_5.setColumns(10);
-		textField_5.setBorder(new LineBorder(MyColor.WHITE, 2));
-		textField_5.setBounds(285, 270, 80, 20);
-		getContentPane().add(textField_5);
+		tf_year = new JTextField();
+		tf_year.setBounds(184, 270, 90, 20);
+		getContentPane().add(tf_year);
+		tf_year.setColumns(10);
+		tf_year.setForeground(Color.black);
+		tf_year.setBorder(new LineBorder(MyColor.WHITE, 2));	
+		getContentPane().add(tf_year);
 		
-		textField_7 = new JTextField();
-		textField_7.setForeground(Color.BLACK);
-		textField_7.setColumns(10);
-		textField_7.setBorder(new LineBorder(MyColor.WHITE, 2));
-		textField_7.setBounds(374, 270, 80, 20);
-		getContentPane().add(textField_7);
+		JLabel lbl_name = new JLabel("\uC774\uB984");
+		lbl_name.setFont(new Font("맑은 고딕", Font.BOLD, 12));
+		lbl_name.setBounds(50, 130, 57, 15);
+		lbl_name.setForeground(MyColor.PLUSIANBLUE);
+		getContentPane().add(lbl_name);
+		
+
+		
+		tf_month = new JTextField();
+		tf_month.setForeground(Color.BLACK);
+		tf_month.setColumns(10);
+		tf_month.setBorder(new LineBorder(MyColor.WHITE, 2));
+		tf_month.setBounds(285, 270, 80, 20);
+		getContentPane().add(tf_month);
+		
+		tf_date = new JTextField();
+		tf_date.setForeground(Color.BLACK);
+		tf_date.setColumns(10);
+		tf_date.setBorder(new LineBorder(MyColor.WHITE, 2));
+		tf_date.setBounds(374, 270, 80, 20);
+		getContentPane().add(tf_date);
+		
+		tf_gender = new JTextField();
+		tf_gender.setForeground(Color.BLACK);
+		tf_gender.setColumns(10);
+		tf_gender.setBorder(new LineBorder(MyColor.WHITE, 2));
+		tf_gender.setBounds(184, 200, 270, 20);
+		getContentPane().add(tf_gender);
+		
+
+		
+		btn_confirm = new JButton("\uD655\uC778");
+		btn_confirm.setFont(new Font("맑은 고딕", Font.BOLD, 18));
+		btn_confirm.setBounds(413, 326, 57, 35);
+		btn_confirm.setOpaque(false);
+		btn_confirm.setBorder(null);
+		btn_confirm.setFocusable(false);
+		btn_confirm.setForeground(MyColor.SLATEGRAY);
+		btn_confirm.addActionListener(new ActionListener(){
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String inputId=tf_id0.getText();//입력한 ID값
+				
+				if(inputId.equals("")) {
+					new CheckGUI(frame, "수정할 확진자의 ID를 입력하여 주세요.", false, false); //실패 메시지와 이유 전달
+				}
+				else if(CoronaSystem.database.getName_Info(inputId)==null) {
+					new CheckGUI(frame, "조회할 ID가 존재하지 않습니다.", false, false); //실패 메시지와 이유 전달
+				}
+				else {
+					tf_name.setText(CoronaSystem.database.getName_Info(inputId));
+					tf_age0.setText(CoronaSystem.database.getAge_Info(inputId));
+					tf_gender.setText(CoronaSystem.database.getGender_Info(inputId));
+					tf_address.setText(CoronaSystem.database.getAddress_Info(inputId));
+					return;
+				}
+				tf_id0.setText("");
+				tf_name.setText("");
+				tf_age0.setText("");
+				tf_gender.setText("");
+				tf_address.setText("");
+			}
+		});
+		
+		getContentPane().add(btn_confirm);//확인
+		
+
 		
 		//JLabel lb_icon_finder = new JLabel(finderIcon);
 		//lb_icon_finder.setBounds(358, 339, 20, 25);
@@ -202,5 +284,17 @@ public class InformationChange extends JFrame{
 		
 		setVisible(true);	
 	}
-
+	private void sendTempMsg(String tmpMsg) { //간단한 메시지 표시
+		lbl_tempMessage.setText(tmpMsg);
+	}
+	
+	
+	
+	private class JFrameWindowClosingEventHandler extends WindowAdapter { //창 닫기시
+		public void windowClosing(WindowEvent e) {
+			if(e.getWindow() instanceof InformationChange) { //홈 화면 닫으면
+				System.exit(0); //프로그램 종료
+			}	
+		}
+	}
 }

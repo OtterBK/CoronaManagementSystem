@@ -129,5 +129,65 @@ public class MyDatabase { //데이터베이스 통신용
 		}
 	}
 	
+	public boolean editInformation(String id, String name, int age, String address, Date date) { //UserInfo(사용자 정보 테이블에) 새로운 값 삽입 또는 수정
+		try {
+			ResultSet result = stmt.executeQuery("SELECT PW FROM CoronicInfo where ID = '"+id+"'");
+			if(!result.next()) return false;
+			name = result.getString("name");
+			age = result.getInt("age");
+			address = result.getString("address");
+			date = result.getDate("date");
+			return true;
+		} catch (SQLException ex) {		
+			System.err.println("SQLException: " + ex.getMessage());
+		}
+		return false;
+	}
+	public String getName_Info(String id) { //ID값을 이용하여 CoronicInfo에서 name 받아옴
+		String name = null;
+		try {
+			ResultSet result = stmt.executeQuery("SELECT name FROM CoronicInfo where coronicID = '"+id+"'");
+			if(!result.next()) return null;
+			name = result.getString("name");
+		} catch (SQLException e) {		
+			e.printStackTrace();
+		}
+		return name;
+	}
+	public String getAge_Info(String id) { //ID값을 이용하여CoronicInfo에서 age 받아옴
+		String age = null;
+		try {
+			ResultSet result = stmt.executeQuery("SELECT age FROM CoronicInfo where coronicID = '"+id+"'");
+			if(!result.next()) return null;
+			age = result.getString("age");
+		} catch (SQLException e) {		
+			e.printStackTrace();
+		}
+		return age;
+	}
+	public String getGender_Info(String id) { //ID값을 이용하여 CoronicInfo에서 gender 받아옴
+		String gender = null;
+		try {
+			ResultSet result = stmt.executeQuery("SELECT gender FROM CoronicInfo where coronicID = '"+id+"'");
+			if(!result.next()) return null;
+			gender = result.getString("gender");
+		} catch (SQLException e) {		
+			e.printStackTrace();
+		}
+		return gender;
+	}
+	public String getAddress_Info(String id) { //ID값을 이용하여  CoronicInfo에서 Address 받아옴
+		String address = null;
+		try {
+			ResultSet result = stmt.executeQuery("SELECT address FROM CoronicInfo where coronicID = '"+id+"'");
+			if(!result.next()) return null;
+			address = result.getString("address");
+		} catch (SQLException e) {		
+			e.printStackTrace();
+		}
+		return address;
+	}
+
+	
 	
 }
