@@ -54,6 +54,16 @@ public class MyDatabase { //데이터베이스 통신용
 		return adminName;
 	}
 	
+	public boolean deleteAdminInfo(String id) {
+		try {
+			stmt.executeUpdate("DELETE From AdminInfo WHERE ID = '"+id+"'");
+			return true;
+		}catch(SQLException ex) {
+			System.err.println("SQLException: " + ex.getMessage());
+			return false;
+		}
+	}
+	
 	public boolean insertRegisterData(String id, String pw) { //LoginInfo(로그인정보 테이블)에 새로운 ID,PW삽입 또는 PW값 수정
 		try {
 			String chekcpw = getPassword(id);
@@ -98,5 +108,6 @@ public class MyDatabase { //데이터베이스 통신용
 			return false;
 		}
 	}
+	
 	
 }

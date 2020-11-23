@@ -8,6 +8,8 @@ package CoronaSystem.UserInterface;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.URL;
 
 import javax.swing.ImageIcon;
@@ -23,16 +25,16 @@ import javax.swing.border.LineBorder;
 import Addon.BubbleBorder;
 import Addon.MyColor;
 import Addon.MyUtility;
+import CoronaSystem.CoronaSystem;
+
 import javax.swing.JButton;
 
 public class AdminInfoDeleteGUI extends JFrame{
 
 	private int frameWidth = 400; //가로
 	private int frameHeight = 450; //세로
-	private JTextField tf_adminName; //어드민명 입력 필드
 	private JTextField tf_id; //id 입력 필드
 	private JPasswordField tf_password; //pw 입력 필드
-	private JPasswordField tf_confirmPassword; //pw 확인 입력 필드
 	
 	public AdminInfoDeleteGUI() {
 		setResizable(false); //창 사이즈 조절 불가능
@@ -74,24 +76,11 @@ public class AdminInfoDeleteGUI extends JFrame{
 		lb_homeIcon.setBounds(235, 12, 50, 50);
 		topPanel.add(lb_homeIcon);
 		
-		JLabel lbl_tfDes1 = new JLabel("관리자명");
-		lbl_tfDes1.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lbl_tfDes1.setBounds(50, 115, 55, 25);
-		getContentPane().add(lbl_tfDes1);
-		
-		tf_adminName = new JTextField();
-		tf_adminName.setHorizontalAlignment(SwingConstants.RIGHT);
-		tf_adminName.setBounds(125, 115, 210, 25);
-		tf_adminName.setBackground(MyColor.LIGHTGRAY);
-		tf_adminName.setForeground(Color.black);
-		tf_adminName.setBorder(new LineBorder(MyColor.WHITE, 2));	
-		getContentPane().add(tf_adminName);
-		tf_adminName.setColumns(10);
-		
 		tf_id = new JTextField();
 		tf_id.setHorizontalAlignment(SwingConstants.RIGHT);
 		tf_id.setColumns(10);
 		tf_id.setBounds(125, 160, 210, 25);
+		tf_id.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		tf_id.setBackground(MyColor.LIGHTGRAY);
 		tf_id.setForeground(Color.black);
 		tf_id.setBorder(new LineBorder(MyColor.WHITE, 2));	
@@ -100,6 +89,7 @@ public class AdminInfoDeleteGUI extends JFrame{
 		JLabel lbl_tfDes2 = new JLabel("ID");
 		lbl_tfDes2.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		lbl_tfDes2.setBounds(50, 160, 55, 25);
+		lbl_tfDes2.setForeground(MyColor.PLUSIANBLUE);
 		getContentPane().add(lbl_tfDes2);
 		
 		tf_password = new JPasswordField(); //패스워드 필드 사용
@@ -108,6 +98,7 @@ public class AdminInfoDeleteGUI extends JFrame{
 		tf_password.setBounds(125, 205, 210, 25);
 		tf_password.setBackground(MyColor.LIGHTGRAY);
 		tf_password.setForeground(Color.black);
+		tf_password.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		tf_password.setEchoChar('*'); //해당 칸에는 입력시 * 로 표시함
 		tf_password.setBorder(new LineBorder(MyColor.WHITE, 2));	
 		getContentPane().add(tf_password);
@@ -115,27 +106,13 @@ public class AdminInfoDeleteGUI extends JFrame{
 		JLabel lbl_tfDes3 = new JLabel("Password");
 		lbl_tfDes3.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 		lbl_tfDes3.setBounds(50, 205, 55, 25);
+		lbl_tfDes3.setForeground(MyColor.PLUSIANBLUE);
 		getContentPane().add(lbl_tfDes3);
-		
-		tf_confirmPassword = new JPasswordField();
-		tf_confirmPassword.setHorizontalAlignment(SwingConstants.RIGHT);
-		tf_confirmPassword.setColumns(10);
-		tf_confirmPassword.setBounds(125, 250, 210, 25);
-		tf_confirmPassword.setBackground(MyColor.LIGHTGRAY);
-		tf_confirmPassword.setForeground(Color.black);
-		tf_confirmPassword.setBorder(new LineBorder(MyColor.WHITE, 2));	
-		tf_confirmPassword.setEchoChar('*'); //해당 칸에는 입력시 * 로 표시함
-		getContentPane().add(tf_confirmPassword);
-		
-		JLabel lbl_tfDes4 = new JLabel("PW 확인");
-		lbl_tfDes4.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
-		lbl_tfDes4.setForeground(MyColor.PLUSIANBLUE);
-		lbl_tfDes4.setBounds(50, 250, 55, 25);
-		getContentPane().add(lbl_tfDes4);
 		
 		JLabel lbl_tempMessage = new JLabel("tmpMsg"); //나중에 행동에 대한 결과값을 간단하게 표시해줄 라벨
 		lbl_tempMessage.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_tempMessage.setBounds(50, 300, 285, 30);
+		lbl_tempMessage.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		getContentPane().add(lbl_tempMessage);
 		
 		JButton btn_add = new JButton("삭제");
@@ -144,6 +121,26 @@ public class AdminInfoDeleteGUI extends JFrame{
 		btn_add.setFocusPainted(false);
 		btn_add.setBounds(238, 340, 97, 23);
 		btn_add.setBackground(MyColor.NAVY);
+		btn_add.addActionListener(new ActionListener() { //삭제 버튼 클릭시
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String inputId = tf_id.getText();
+				String inputPw = tf_password.getText();
+				String pw = CoronaSystem.database.getPassword(inputId);
+				if(pw == null) {
+					lbl_tempMessage.setText("존재하지 않는 ID 입니다.");
+				} else {
+					if(pw.equals(inputPw)) {
+						CoronaSystem.database.deleteAdminInfo(inputId);
+						lbl_tempMessage.setText(inputId+" 계정이 삭제됐습니다.");	
+					} else {
+						lbl_tempMessage.setText("잘못된 패스워드입니다.");
+					}
+				}
+				
+			}
+		});
 		getContentPane().add(btn_add);
 		
 		

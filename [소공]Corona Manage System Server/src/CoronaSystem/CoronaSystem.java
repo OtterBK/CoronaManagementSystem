@@ -21,15 +21,15 @@ public class CoronaSystem {
 	public static void main(String[] args) {
 		LoginGUI home = new LoginGUI();
 		
-		new HomeGUI();
+		//new HomeGUI();
 		
-		new AdminInfoAddGUI();
+		//new AdminInfoAddGUI();
 		
 		new AdminInfoDeleteGUI();
 		
-		new InformationAdd();
+		//new InformationAdd();
 		
-		new CoronaMapAdd();
+		//new CoronaMapAdd();
 		
 		RmiServer rmiServer = new RmiServer(); //서버 열기
 	}
