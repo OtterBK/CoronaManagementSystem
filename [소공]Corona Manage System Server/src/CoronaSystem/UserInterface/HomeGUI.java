@@ -31,7 +31,7 @@ import java.awt.*;
 public class HomeGUI extends JFrame{
 
 	private int frameWidth = 500;
-	private int frameHeight = 600;
+	private int frameHeight = 650;
 	private JLabel btn_adminInfoAdd2;
 	private JLabel btn_adminInfoDel2;
 	private JLabel lbl_coronicInfo_add;
@@ -47,7 +47,7 @@ public class HomeGUI extends JFrame{
 		addWindowListener(new JFrameWindowClosingEventHandler()); //창 닫기 이벤트
 		setBounds((int) tk.getScreenSize().getWidth() / 2 - frameWidth /2, (int) tk.getScreenSize().getHeight() / 2 - frameHeight/2, frameWidth, frameHeight);
 		
-		setTitle("코로나 관리 시스템");
+		setTitle("코로나 관리 시스템 - 메뉴");
 		getContentPane().setBackground(MyColor.ALICEBLUE);
 		getContentPane().setLayout(null);
 

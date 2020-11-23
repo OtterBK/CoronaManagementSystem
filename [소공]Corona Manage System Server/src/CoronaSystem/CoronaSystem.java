@@ -5,26 +5,31 @@
 
 package CoronaSystem;
 
+import CoronaSystem.UserInterface.AdminInfoAddGUI;
+import CoronaSystem.UserInterface.AdminInfoDeleteGUI;
+import CoronaSystem.UserInterface.CoronaMapAdd;
+import CoronaSystem.UserInterface.HomeGUI;
+import CoronaSystem.UserInterface.InformationAdd;
 import CoronaSystem.UserInterface.LoginGUI;
 import Network.MyDatabase;
 import Network.RmiServer;
 
 public class CoronaSystem {
 
-	public static MyDatabase database = new MyDatabase();
+	public static MyDatabase database = new MyDatabase(); //데이터베이스 통신용 객체 생성
 	
 	public static void main(String[] args) {
 		LoginGUI home = new LoginGUI();
 		
-		//new HomeGUI();
+		new HomeGUI();
 		
-		//new AdminInfoAddGUI();
+		new AdminInfoAddGUI();
 		
-		//new AdminInfoDeleteGUI();
+		new AdminInfoDeleteGUI();
 		
-		//new InformationAdd();
+		new InformationAdd();
 		
-		//new CoronaMapAdd();
+		new CoronaMapAdd();
 		
 		RmiServer rmiServer = new RmiServer(); //서버 열기
 	}

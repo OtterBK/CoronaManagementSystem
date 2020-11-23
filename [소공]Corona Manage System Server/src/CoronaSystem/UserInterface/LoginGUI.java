@@ -1,6 +1,6 @@
 //Front: 전재욱
 //Back: 전재욱
-//Last Update : 20.11.22
+//Last Update : 20.11.23
 //Des: 로그인 프레임 및 디자인
 
 package CoronaSystem.UserInterface;
@@ -35,25 +35,25 @@ import CoronaSystem.CoronaSystem;
 
 public class LoginGUI extends JFrame{
 
-	private int frameWidth = 500;
-	private int frameHeight = 400;
-	private JFormattedTextField tf_id;
-	private JPasswordField tf_pw;
-	private JButton btn_findPassword;
+	private int frameWidth = 500; //프레임 가로 크기
+	private int frameHeight = 400; //프레임 세로크기
+	private JFormattedTextField tf_id; //id 입력 필드
+	private JPasswordField tf_pw; //pw 입력 필드
+	private JButton btn_findPassword; //비밀번호 찾기 버튼
 	
 	public LoginGUI() {
-		setResizable(false);
+		setResizable(false); //프레임 크기 조절 막기
 		Toolkit tk = Toolkit.getDefaultToolkit(); //사용자의 화면 크기값을 얻기위한 툴킷 클래스
 		
-		setSize(frameWidth,frameHeight);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setSize(frameWidth,frameHeight); //프레임 크기 설정
+		setDefaultCloseOperation(EXIT_ON_CLOSE); //로그인 프레임 닫으면 프로그램 종료
 		addWindowListener(new JFrameWindowClosingEventHandler()); //창 닫기 이벤트
 		setBounds((int) tk.getScreenSize().getWidth() / 2 - frameWidth /2, (int) tk.getScreenSize().getHeight() / 2 - frameHeight/2, frameWidth, frameHeight);
 		
-		setTitle("코로나 관리 시스템 - 로그인");
+		setTitle("코로나 관리 시스템 - 로그인"); //프레임 제목 설정
 		
 		getContentPane().setLayout(null);
-		getContentPane().setBackground(MyColor.ALICEBLUE);
+		getContentPane().setBackground(MyColor.ALICEBLUE); //배경색 설정
 		
 		//둥근 모서리
 		AbstractBorder brdr = new BubbleBorder(Color.BLACK,2,16,0);
@@ -102,19 +102,19 @@ public class LoginGUI extends JFrame{
             @Override
             public void keyPressed(KeyEvent event) {
                 if(event.getKeyCode() == 10) { // 엔터키 키를 눌렀으면
-                	tryLogin();
+                	tryLogin(); //로그인 시도
                 } 
             }
             
             @Override
             public void keyTyped(KeyEvent e) {
-//            	char c = e.getKeyChar(); 숫자만
+//            	char c = e.getKeyChar(); 숫자만 입력 받을 때 사용
 //            	if(!Character.isDigit(c)) {
 //            		e.consume();
 //            	}
             	
             	JTextField tf = (JTextField) e.getSource();
-            	if(tf.getText().length() >= 12) {
+            	if(tf.getText().length() >= 12) { //12자 이상 입력 못하게 제한
             		e.consume();
             	}
             }
@@ -140,7 +140,7 @@ public class LoginGUI extends JFrame{
             @Override
             public void keyTyped(KeyEvent e) {
             	JPasswordField tf = (JPasswordField) e.getSource();
-            	if(tf.getText().length() >= 14) {
+            	if(tf.getText().length() >= 14) { //14자 이상 입력 못하게 제한
             		e.consume();
             	}
             }
@@ -187,11 +187,11 @@ public class LoginGUI extends JFrame{
 		btn_findPassword.setContentAreaFilled(false);
 		btn_findPassword.setFocusable(false);
 		btn_findPassword.setIcon(finderIcon);
-		btn_findPassword.addActionListener(new ActionListener() {
+		btn_findPassword.addActionListener(new ActionListener() { //비밀번호 찾기 클릭했다면
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JFrame findPasswordGUI = new FindPasswordGUI();
+				JFrame findPasswordGUI = new FindPasswordGUI(); //비밀번호 찾기 프레임 띄우기
 			}
 		});
 		getContentPane().add(btn_findPassword);
@@ -223,9 +223,9 @@ public class LoginGUI extends JFrame{
 			} else { 
 				if(!pw.equals(resPW)) { //데이터베이스의 pw값과 사용자가 보낸 pw값이 일치하지 않다면 
 					new CheckGUI(this, "비밀번호가 틀립니다.", false, false); //실패 메시지와 이유 전달
-				} else { 
-					new HomeGUI();
-					this.dispose();
+				} else { //로그인 성공 시 
+					new HomeGUI(); // 메인 메뉴 프레임 띄우기
+					this.dispose(); //로그인 프레임 닫기
 				}
 				
 			}

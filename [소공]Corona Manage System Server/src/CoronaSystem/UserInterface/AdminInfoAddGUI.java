@@ -80,6 +80,7 @@ public class AdminInfoAddGUI extends JFrame{
 		JLabel lbl_tfDes1 = new JLabel("°ü¸®ÀÚ¸í"); 
 		lbl_tfDes1.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		lbl_tfDes1.setBounds(50, 115, 55, 25);
+		lbl_tfDes1.setForeground(MyColor.PLUSIANBLUE);
 		getContentPane().add(lbl_tfDes1);
 		
 		tf_adminName = new JTextField();
@@ -127,6 +128,7 @@ public class AdminInfoAddGUI extends JFrame{
 		JLabel lbl_tfDes2 = new JLabel("ID");
 		lbl_tfDes2.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		lbl_tfDes2.setBounds(50, 160, 55, 25);
+		lbl_tfDes2.setForeground(MyColor.PLUSIANBLUE);
 		getContentPane().add(lbl_tfDes2);
 		
 		tf_password = new JPasswordField();
@@ -154,6 +156,7 @@ public class AdminInfoAddGUI extends JFrame{
 		JLabel lbl_tfDes3 = new JLabel("Password");
 		lbl_tfDes3.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 12));
 		lbl_tfDes3.setBounds(50, 205, 55, 25);
+		lbl_tfDes3.setForeground(MyColor.PLUSIANBLUE);
 		getContentPane().add(lbl_tfDes3);
 		
 		tf_confirmPassword = new JPasswordField();

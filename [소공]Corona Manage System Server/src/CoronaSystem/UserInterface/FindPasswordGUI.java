@@ -29,37 +29,38 @@ import CoronaSystem.CoronaSystem;
 
 public class FindPasswordGUI extends JFrame{
 	
-	private int frameWidth = 350;
-	private int frameHeight = 250;
-	private JTextField tf_adminName;
-	private JTextField tf_id;
+	private int frameWidth = 350; //프레임 가로 크기
+	private int frameHeight = 250; //프레임 세로 크기
+	private JTextField tf_adminName; //관리자명 입력 필드
+	private JTextField tf_id; //id 입력 필드
 	
 	private JFrame frame; //자기 자신의 주소값
 	
-	private static FindPasswordGUI lastGUI; 
+	private static FindPasswordGUI lastGUI; //마지막에 열린 해당 프레임 객체 
 
 	public FindPasswordGUI() {
-		frame = this;
+		frame = this; //해당 객체 주소값 저장
 		
-		if(lastGUI != null) {
+		if(lastGUI != null) { //마지막 열린 프레임객체가 null 이 아니라면
 			try {
-				lastGUI.dispose();
+				lastGUI.dispose(); //이전 비밀번호 찾기 프레임은 닫아버림, 비밀번호 프레임을 2개 여는 것을 방지
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		lastGUI = this;
-		setResizable(false);
+		lastGUI = this; //마지막 열린 객체를 자기 자신으로 설정
+		setResizable(false); //프레임 크기 조절 방지
 		Toolkit tk = Toolkit.getDefaultToolkit(); //사용자의 화면 크기값을 얻기위한 툴킷 클래스
 		
-		setSize(frameWidth,frameHeight);
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setSize(frameWidth,frameHeight); //프레임 크기 설정
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE); //해당 프레임은 닫으면 그냥 닫힘
+		//화면 가운데에 프레임 띄우기
 		setBounds((int) tk.getScreenSize().getWidth() / 2 - frameWidth /2, (int) tk.getScreenSize().getHeight() / 2 - frameHeight/2, frameWidth, frameHeight);
 		
-		setTitle("코로나 관리 시스템");
+		setTitle("코로나 관리 시스템"); //프레임 제목 설정
 		
-		getContentPane().setLayout(null);
-		getContentPane().setBackground(MyColor.ALICEBLUE);
+		getContentPane().setLayout(null); //절대 배치 사용
+		getContentPane().setBackground(MyColor.ALICEBLUE); //배경색 설정
 		
 		//둥근 모서리
 		AbstractBorder brdr = new BubbleBorder(Color.BLACK,2,16,0);
@@ -120,21 +121,21 @@ public class FindPasswordGUI extends JFrame{
 		btn_find.setFocusPainted(false);
 		btn_find.setBounds(220, 170, 100, 25);
 		btn_find.setBackground(MyColor.NAVY);
-		btn_find.addActionListener(new ActionListener() {
+		btn_find.addActionListener(new ActionListener() { //찾기 버튼 클릭시
 			
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				String adminName = tf_adminName.getText();
-				String id = tf_id.getText();
-				findPassword(adminName, id);
+			public void actionPerformed(ActionEvent e) { 
+				String adminName = tf_adminName.getText(); //관리자명 입력 필드에서 입력값 가져옴
+				String id = tf_id.getText(); //id 입력 필드에서 입력값 가져옴
+				findPassword(adminName, id); //비밀번호 찾기 메서드 호출
 			}
 		});
 		getContentPane().add(btn_find);
 		
-		setVisible(true);
+		setVisible(true); //프레임 표시
 	}
 	
-	private void findPassword(String adminName, String id) {
+	private void findPassword(String adminName, String id) { //비밀번호 찾기
 		String findAdminName = CoronaSystem.database.getAdminName(id); //데이터베이스에서 id 따른 어드민명 가져옴
 		if(findAdminName != null && findAdminName.equals(adminName)) { //어드민 이름 일치하면
 			String basePw = CoronaSystem.database.getPassword(id); //데이터베이스에서 id 따른 패스워드 가져옴

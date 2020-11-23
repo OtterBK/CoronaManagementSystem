@@ -8,10 +8,12 @@ import javax.swing.ImageIcon;
 
 public class MyUtility {
 
+	//로그 출력, 후에 gui로 표시
 	public static void printLog(String logMsg) {
 		System.out.println(logMsg);
 	}
 	
+	//이미지 크기 변경
 	public static ImageIcon resizeImage(ImageIcon baseIcon, int newWidth, int newHeight) {
 		Image tmpImage = baseIcon.getImage();
 		Image chgImage = tmpImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
