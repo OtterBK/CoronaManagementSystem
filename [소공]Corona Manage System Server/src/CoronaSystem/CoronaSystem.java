@@ -25,7 +25,7 @@ public class CoronaSystem {
 		
 		//new AdminInfoAddGUI();
 		
-		new AdminInfoDeleteGUI();
+		//new AdminInfoDeleteGUI();
 		
 		//new InformationAdd();
 		

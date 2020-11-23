@@ -8,6 +8,8 @@ package CoronaSystem.UserInterface;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.net.URL;
@@ -25,6 +27,8 @@ import javax.swing.border.LineBorder;
 import Addon.BubbleBorder;
 import Addon.MyColor;
 import Addon.MyUtility;
+import CoronaSystem.CoronaSystem;
+
 import javax.swing.JButton;
 
 public class AdminInfoAddGUI extends JFrame{
@@ -35,8 +39,13 @@ public class AdminInfoAddGUI extends JFrame{
 	private JTextField tf_id; //id 입력 텍스트필드
 	private JPasswordField tf_password; //pw 입력 텍스트필드
 	private JPasswordField tf_confirmPassword; //pw 확인 입력 테스트 필드
+	private JLabel lbl_tempMessage;
+	
+	private JFrame frame; //자기 자신의 주소 저장용
 	
 	public AdminInfoAddGUI() {
+		frame = this;
+		
 		setResizable(false); //창 사이즈 변경  불가능
 		Toolkit tk = Toolkit.getDefaultToolkit(); //사용자의 화면 크기값을 얻기위한 툴킷 클래스
 		
@@ -92,12 +101,12 @@ public class AdminInfoAddGUI extends JFrame{
 		getContentPane().add(tf_adminName);
 		tf_adminName.setColumns(10);
 		tf_adminName.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		tf_adminName.addKeyListener(new KeyAdapter() {
+		tf_adminName.addKeyListener(new KeyAdapter() { //관리자명은 최대 10글자까지만 입력 가능
 			
 			 @Override
 	            public void keyTyped(KeyEvent e) {
 				 JTextField tf = (JTextField) e.getSource();
-	            	if(tf.getText().length() >= 14) {
+	            	if(tf.getText().length() >= 10) {
 	            		e.consume();
 	            	}
 	            }
@@ -112,12 +121,12 @@ public class AdminInfoAddGUI extends JFrame{
 		tf_id.setForeground(Color.black);
 		tf_id.setBorder(new LineBorder(MyColor.WHITE, 2));
 		tf_id.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		tf_id.addKeyListener(new KeyAdapter() {
+		tf_id.addKeyListener(new KeyAdapter() { //id는 12글자까지만 입력가능
 			
 			 @Override
 	            public void keyTyped(KeyEvent e) {
 				 JTextField tf = (JTextField) e.getSource();
-	            	if(tf.getText().length() >= 14) {
+	            	if(tf.getText().length() >= 12) {
 	            		e.consume();
 	            	}
 	            }
@@ -140,7 +149,7 @@ public class AdminInfoAddGUI extends JFrame{
 		tf_password.setEchoChar('*'); //해당 칸에는 입력시 * 로 표시함
 		tf_password.setBorder(new LineBorder(MyColor.WHITE, 2));	
 		tf_password.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
-		tf_password.addKeyListener(new KeyAdapter() {
+		tf_password.addKeyListener(new KeyAdapter() { //pw는 14글자까지만 입력 가능
 			
 			 @Override
 	            public void keyTyped(KeyEvent e) {
@@ -168,7 +177,7 @@ public class AdminInfoAddGUI extends JFrame{
 		tf_confirmPassword.setBorder(new LineBorder(MyColor.WHITE, 2));	
 		tf_confirmPassword.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		tf_confirmPassword.setEchoChar('*'); //해당 칸에는 입력시 * 로 표시함
-		tf_confirmPassword.addKeyListener(new KeyAdapter() {
+		tf_confirmPassword.addKeyListener(new KeyAdapter() { //pw확인은 14글자까지만 입력가능
 			
 			 @Override
 	            public void keyTyped(KeyEvent e) {
@@ -187,9 +196,10 @@ public class AdminInfoAddGUI extends JFrame{
 		lbl_tfDes4.setBounds(50, 250, 55, 25);
 		getContentPane().add(lbl_tfDes4);
 		
-		JLabel lbl_tempMessage = new JLabel("tmpMsg");
+		lbl_tempMessage = new JLabel("tmpMsg");
 		lbl_tempMessage.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_tempMessage.setBounds(50, 300, 285, 30);
+		lbl_tempMessage.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		getContentPane().add(lbl_tempMessage);
 		
 		JButton btn_add = new JButton("추가");
@@ -198,10 +208,36 @@ public class AdminInfoAddGUI extends JFrame{
 		btn_add.setFocusPainted(false);
 		btn_add.setBounds(238, 340, 97, 23);
 		btn_add.setBackground(MyColor.NAVY);
+		btn_add.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) { //추가 버튼 눌렀을 때 
+				String inputId = tf_id.getText(); //입력한 id값
+				String inputPw = tf_password.getText(); //입력한 pw값
+				String inputAdminName = tf_adminName.getText(); //입력한 관리자명 값
+				String inputCfPw = tf_confirmPassword.getText(); //입력한 pw확인값
+				if(!inputPw.equals(inputCfPw)) { //만약 pw값과 pw확인값 불일치시
+					sendTempMsg("비밀번호가 일치하지 않습니다.");
+				} else {
+					String baseId = CoronaSystem.database.getPassword(inputId); 
+					if(baseId != null) { //이미 존재하는 id면
+						sendTempMsg("이미 존재하는 ID입니다.");
+					} else { //존재안하면
+						CoronaSystem.database.insertAdminInfo(inputId, inputPw, inputAdminName);//계정 추가
+						CheckGUI checkGUI = new CheckGUI(frame, "계정이 추가됐습니다.", false, true);
+						//관리자 계정 추가 프레임까지 닫기
+					}
+				}
+			}
+		});
 		getContentPane().add(btn_add);
 		
 		
 		
 		setVisible(true);
+	}
+	
+	private void sendTempMsg(String tmpMsg) { //간단한 메시지 표시
+		lbl_tempMessage.setText(tmpMsg);
 	}
 }

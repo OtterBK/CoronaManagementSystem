@@ -35,6 +35,7 @@ public class AdminInfoDeleteGUI extends JFrame{
 	private int frameHeight = 450; //세로
 	private JTextField tf_id; //id 입력 필드
 	private JPasswordField tf_password; //pw 입력 필드
+	private JLabel lbl_tempMessage;
 	
 	public AdminInfoDeleteGUI() {
 		setResizable(false); //창 사이즈 조절 불가능
@@ -109,7 +110,7 @@ public class AdminInfoDeleteGUI extends JFrame{
 		lbl_tfDes3.setForeground(MyColor.PLUSIANBLUE);
 		getContentPane().add(lbl_tfDes3);
 		
-		JLabel lbl_tempMessage = new JLabel("tmpMsg"); //나중에 행동에 대한 결과값을 간단하게 표시해줄 라벨
+		lbl_tempMessage = new JLabel("tmpMsg"); //나중에 행동에 대한 결과값을 간단하게 표시해줄 라벨
 		lbl_tempMessage.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_tempMessage.setBounds(50, 300, 285, 30);
 		lbl_tempMessage.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
@@ -146,5 +147,9 @@ public class AdminInfoDeleteGUI extends JFrame{
 		
 		
 		setVisible(true);
+	}
+	
+	private void sendTempMsg(String tmpMsg) {
+		lbl_tempMessage.setText(tmpMsg);
 	}
 }

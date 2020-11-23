@@ -54,26 +54,27 @@ public class MyDatabase { //데이터베이스 통신용
 		return adminName;
 	}
 	
-	public boolean deleteAdminInfo(String id) {
+	public boolean insertAdminInfo(String id, String pw, String adminName) { //AminInfo(로그인정보 테이블)에 새로운 ID,PW, AdminName삽입 또는 PW값 수정
 		try {
-			stmt.executeUpdate("DELETE From AdminInfo WHERE ID = '"+id+"'");
+			String chekcpw = getPassword(id); //이미 아이디 존재하는지 확인하기 위해
+			if(chekcpw == null) { //존재안하면
+				stmt.executeUpdate("INSERT INTO AdminInfo VALUES ('"+id+"','"+pw+"','"+adminName+"')");
+			} else {
+				stmt.executeUpdate("UPDATE AdminInfo SET PW = '"+pw+"' WHERE ID = '"+id+"'");
+				stmt.executeUpdate("UPDATE AdminInfo SET AdminName = '"+adminName+"' WHERE ID = '"+id+"'");
+			}
 			return true;
-		}catch(SQLException ex) {
+		} catch(SQLException ex) {
 			System.err.println("SQLException: " + ex.getMessage());
 			return false;
 		}
 	}
 	
-	public boolean insertRegisterData(String id, String pw) { //LoginInfo(로그인정보 테이블)에 새로운 ID,PW삽입 또는 PW값 수정
+	public boolean deleteAdminInfo(String id) {
 		try {
-			String chekcpw = getPassword(id);
-			if(chekcpw == null) {
-				stmt.executeUpdate("INSERT INTO AdminInfo VALUES ('"+id+"','"+pw+"')");
-			} else {
-				stmt.executeUpdate("UPDATE AdminInfo SET PW = '"+pw+"' WHERE ID = '"+id+"'");
-			}
+			stmt.executeUpdate("DELETE From AdminInfo WHERE ID = '"+id+"'");
 			return true;
-		} catch(SQLException ex) {
+		}catch(SQLException ex) {
 			System.err.println("SQLException: " + ex.getMessage());
 			return false;
 		}
