@@ -213,8 +213,20 @@ public class AdminInfoAddGUI extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) { //추가 버튼 눌렀을 때 
 				String inputId = tf_id.getText(); //입력한 id값
+				if(inputId.equals("")) {
+					sendTempMsg("추가할 ID를 입력해주세요.");
+					return;
+				}
 				String inputPw = tf_password.getText(); //입력한 pw값
+				if(inputPw.equals("")) {
+					sendTempMsg("PW를 입력해주세요.");
+					return;
+				}
 				String inputAdminName = tf_adminName.getText(); //입력한 관리자명 값
+				if(inputAdminName.equals("")) {
+					sendTempMsg("관리자명을 입력해주세요.");
+					return;
+				}
 				String inputCfPw = tf_confirmPassword.getText(); //입력한 pw확인값
 				if(!inputPw.equals(inputCfPw)) { //만약 pw값과 pw확인값 불일치시
 					sendTempMsg("비밀번호가 일치하지 않습니다.");
