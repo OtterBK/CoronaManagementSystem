@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#6DF4E34D"
+    tools:context=".map_display">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="121dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginBottom="506dp"
+        android:lines="2"
+        android:text="Confirmed case-\n\t\t\t\t\t\thuman traffic"
+        android:textAllCaps="false"
+        android:textColor="@color/colorBlack"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/virus"
+        android:layout_width="98dp"
+        android:layout_height="117dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="128dp"
+        android:layout_marginEnd="290dp"
+        android:layout_marginBottom="487dp"
+        android:src="@drawable/virus"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/distance"
+        android:layout_width="239dp"
+        android:layout_height="201dp"
+        android:layout_marginStart="95dp"
+        android:layout_marginTop="299dp"
+        android:layout_marginEnd="77dp"
+        android:layout_marginBottom="231dp"
+        android:src="@drawable/distance"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+</androidx.constraintlayout.widget.ConstraintLayout>
