@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: kris.shin
+Build-Jdk: 1.8.0_111
+Implementation-Title: DaumMapLibraryAndroid
+Implementation-Version: 1.4.1.0
+Implementation-Vendor-Id: net.daum.mf
+
