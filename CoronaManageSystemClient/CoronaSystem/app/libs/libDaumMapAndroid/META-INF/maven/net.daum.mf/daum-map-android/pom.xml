@@ -1,0 +1,152 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>net.daum.mf</groupId>
+		<artifactId>daum-mobile-common-parent</artifactId>
+		<version>1.1.0</version>
+	</parent>
+
+	<properties>
+	<javadocExecutable>${java.home}/../bin/javadoc</javadocExecutable>
+	</properties>
+
+	<groupId>net.daum.mf</groupId>
+	<artifactId>daum-map-android</artifactId>
+	<name>DaumMapLibraryAndroid</name>
+	<version>1.4.1.0</version>
+	<packaging>jar</packaging>
+
+	<build>
+		<defaultGoal>package</defaultGoal>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.1.2</version>
+				<executions>
+					<execution>
+						<id>attatch-sources</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-install-plugin</artifactId>
+				<configuration>
+					<createChecksum>true</createChecksum>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.3.1</version>
+				<configuration>
+					<excludes>
+						<exclude>**/*TestCase.java</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>com.google.android</groupId>
+			<artifactId>android</artifactId>
+			<version>5.0_r1</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+	<repositories>
+		<repository>
+			<id>codehaus</id>
+			<name>codehaus mvn repository</name>
+			<url>http://snapshots.repository.codehaus.org</url>
+		</repository>
+		<repository>
+			<id>ivy_mvn_repo</id>
+			<name>Internal Release Repository</name>
+			<url>http://cacao.hosts.daum.net/archiva/repository/internal/</url>
+			<releases>
+				<updatePolicy>always</updatePolicy>
+			</releases>
+			<snapshots>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>daum-public</id>
+			<url>http://maven.daumcorp.com/content/groups/daum-public</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>daum-ma</id>
+			<name>Daum Mobile Repository Group</name>
+			<url>http://maven.daumcorp.com/content/groups/daum-ma-group</url>
+			<releases>
+				<updatePolicy>always</updatePolicy>
+			</releases>
+			<snapshots>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<reporting>
+		<plugins>
+			<!--
+				<plugin> <groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>2.3</version> <configuration>
+				<configLocation>${basedir}/checkstyle.xml</configLocation>
+				<enableRulesSummary>false</enableRulesSummary>
+				<headerFile>${basedir}/license-header.txt</headerFile>
+				</configuration> </plugin> <plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>clirr-maven-plugin</artifactId> <version>2.2.2</version>
+				<configuration> <comparisonVersion>1.8.0</comparisonVersion>
+				<minSeverity>info</minSeverity> </configuration> </plugin>
+			-->
+
+		</plugins>
+	</reporting>
+
+
+	<distributionManagement>
+		<repository>
+			<id>daum-ma</id>
+			<name>Daum Mobile 2 Repository</name>
+			<url>http://maven.daumcorp.com/content/repositories/daum-ma</url>
+		</repository>
+		<snapshotRepository>
+			<id>daum-ma-snapshots</id>
+			<name>Daum Mobile 2 Snapshot Repository</name>
+			<url>http://maven.daumcorp.com/content/repositories/daum-ma-snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+	<profiles>
+		<profile>
+			<id>release</id>
+			<build>
+				<plugins>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>
