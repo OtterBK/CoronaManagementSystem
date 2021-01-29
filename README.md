@@ -12,11 +12,18 @@
 
 
 ### 자료흐름도 (Data Flow Diagrams)
+<div align=center>
+  
 ![image](https://user-images.githubusercontent.com/28488288/106213512-3863de80-6210-11eb-8357-61395710e329.png)
 
+</div>
+
 ## 시스템 구조도
+<div align=center>
+  
 ![image](https://user-images.githubusercontent.com/28488288/106216164-defeae00-6215-11eb-8b14-8bb1f8d48d32.png)
 
+</div>
 
 #### 동작 방식
 ```
