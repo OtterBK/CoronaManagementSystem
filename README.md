@@ -49,4 +49,9 @@ DB <-> 서버 <-> 클라이언트
 * LipeRMI - 서버, 클라이언트간 네트워크 통신
 ```
 
+#### 실행 예시
+![serverSnapshot](https://user-images.githubusercontent.com/28488288/106217509-ba580580-6218-11eb-9fa9-fdcaa13aeea9.gif)
+
+
 ### 자세한 내용은 계획서를 확인해주세요.
+[코로나 관리 시스템 계획서](https://github.com/OtterBK/CoronaManagementSystem/tree/master/%EA%B3%84%ED%9A%8D%EC%84%9C)
