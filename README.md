@@ -8,9 +8,12 @@
 
 ## :clipboard: 코로나 확진자 동선 관리 및 조회 시스템 :computer: 
 #### [COVID 19 확진자 동선 파악] 에 중점을 둔 시스템으로 서버와 클라이언트로 구성됩니다. :memo:
+
+<div align=center>
+  
 ![image](https://user-images.githubusercontent.com/28488288/106216422-6d732f80-6216-11eb-9110-b7ac0d39fa73.png)
 
-
+</div>
 
 #### :arrows_counterclockwise: 자료흐름도 (Data Flow Diagrams)
 <div align=center>
