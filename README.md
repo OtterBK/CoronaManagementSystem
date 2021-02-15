@@ -29,6 +29,20 @@
 
 </div>
 
+#### 🗨 사용사례 다이어그램 (Data Flow Diagrams)
+<div align=center>
+  
+![사용사례다이어그램](https://user-images.githubusercontent.com/28488288/107985973-7f264680-700e-11eb-9b28-422e4bd4f373.png)
+
+</div>
+
+#### 🖇 클래스 다이어그램 다이어그램 (Data Flow Diagrams)
+<div align=center>
+  
+![클래스다이어그램](https://user-images.githubusercontent.com/28488288/107985975-7fbedd00-700e-11eb-951d-255ceb1eb832.png)
+
+</div>
+
 #### :recycle: 동작 방식
 ```
 DB <-> 서버 <-> 클라이언트
